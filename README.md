@@ -1,2 +1,2 @@
 # EducaANAP
-EducaANAP: Educação Ambiental e Sustentabilidde
+Educação Ambiental e Sustentabilidde
