@@ -872,7 +872,14 @@ details.dica[open]>summary::after{transform:translateY(2px) rotate(-135deg)}
 .festa i{position:absolute;font-style:normal;font-size:1.7rem;animation:voa .95s ease-out forwards}
 </style>
 <script src="https://vlibras.gov.br/app/vlibras-plugin.js" defer onload="try{new window.VLibras.Widget({rootPath:'https://vlibras.gov.br/app',avatar:'guga',position:'R'});document.documentElement.classList.add('tem-libras')}catch(e){}"></script>
-</head>
+<style id="eco-ouvir-css">
+.eco-ouvir{font:inherit;font-weight:700;font-size:.82rem;color:#12235A;background:#FFF2C2;border:2px solid #B08D4A;border-radius:999px;padding:3px 12px 3px 8px;min-height:32px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;vertical-align:middle;line-height:1}
+.eco-ouvir svg{width:18px;height:18px;margin:0;position:static}
+.eco-ouvir.falando{background:#12235A;border-color:#12235A;color:#fff}
+.balao .eco-ouvir{margin-top:8px}
+.jogo h3 .eco-ouvir{margin-left:10px}
+@media print{.eco-ouvir{display:none}}
+</style></head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <linearGradient id="gCopa" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8FE08A"/><stop offset="1" stop-color="#2A9C4C"/></linearGradient>
@@ -2269,5 +2276,21 @@ function som(tipo){
 })();
 })();
 </script>
-</body>
+<script id="eco-ouvir-js">
+(function(){
+  if(!('speechSynthesis' in window)) return;
+  var IC='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l6-5v16l-6-5H3Z" fill="currentColor"/><path d="M16 8q3 4 0 8M19 5q5 7 0 14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+  function limpa(el){ if(!el) return ''; var c=el.cloneNode(true); c.querySelectorAll('button,svg,small,.legenda,.eco-ouvir,[hidden]').forEach(function(x){ x.remove(); }); c.querySelectorAll('li,p,h4').forEach(function(x){ x.append('. '); }); return c.textContent.replace(/\s+/g,' ').replace(/(\. )+/g,'. ').trim(); }
+  function falar(txt,b){ var ja=b.classList.contains('falando'); speechSynthesis.cancel(); document.querySelectorAll('.eco-ouvir.falando').forEach(function(x){ x.classList.remove('falando'); x.lastChild.textContent=' Ouvir'; }); if(ja||!txt) return;
+    var u=new SpeechSynthesisUtterance(txt); u.lang='pt-BR'; u.rate=.95; u.onend=u.onerror=function(){ b.classList.remove('falando'); b.lastChild.textContent=' Ouvir'; }; b.classList.add('falando'); b.lastChild.textContent=' Parar'; speechSynthesis.speak(u); }
+  function bt(rot){ var b=document.createElement('button'); b.type='button'; b.className='eco-ouvir'; b.setAttribute('aria-label',rot); b.innerHTML=IC+'<span> Ouvir</span>'; return b; }
+  function montar(){
+    document.querySelectorAll('.cap:not(.capa) .fala .balao').forEach(function(f){ if(f.querySelector('.eco-ouvir,.e5-ouvir')) return; var b=bt('Ouvir a fala do mascote'); b.addEventListener('click',function(){ falar(limpa(f),b); }); f.appendChild(b); });
+    document.querySelectorAll('.cap .jogo').forEach(function(j){ var h=j.querySelector('h3'); if(!h||h.querySelector('.eco-ouvir,.e5-ouvir')) return; var tit=h.textContent, b=bt('Ouvir as instruções e o texto da atividade');
+      b.addEventListener('click',function(){ var partes=[tit, limpa(j.querySelector('h3+p'))]; j.querySelectorAll('.painel,.aviso').forEach(function(p){ if(!p.hidden&&p.offsetParent!==null) partes.push(limpa(p)); }); falar(partes.filter(Boolean).join('. '),b); }); h.appendChild(b); });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',montar); else montar();
+  window.addEventListener('pagehide',function(){ try{ speechSynthesis.cancel(); }catch(e){} });
+})();
+</script></body>
 </html>
