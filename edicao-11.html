@@ -4566,7 +4566,7 @@ const e11Acoes=(function(){ const Y=Z11, K=Z10.K, f=c=>'<rect width="64" height=
   let feito={}, erros=0, alvo=-1, cena, painel;
   const fundo=()=>{ let s='<rect width="640" height="380" fill="#BFE6FF"/>'+Z.sol(560,40,20)+Z.nuvem(360,12,.8)+'<path d="M0 190h640v190H0Z" fill="#9ED89A"/><rect x="230" y="190" width="200" height="190" fill="#D9D2C5"/><path d="M230 190h200" stroke="#BDB7AF" stroke-width="3"/>';
     s+='<rect x="190" y="100" width="130" height="110" fill="#FFF1D6" stroke="#12235A" stroke-opacity=".3" stroke-width="2"/><path d="M180 104L255 60l75 44Z" fill="#E8855A" stroke="#12235A" stroke-opacity=".3" stroke-width="2"/><rect x="240" y="150" width="28" height="60" rx="3" fill="#8A5630"/><rect x="204" y="124" width="28" height="22" rx="3" fill="#9FD0F2" stroke="#fff" stroke-width="3"/><rect x="280" y="124" width="28" height="22" rx="3" fill="#9FD0F2" stroke="#fff" stroke-width="3"/>';
-    s+='<rect x="70" y="66" width="80" height="140" fill="#C9BBB3" stroke="#12235A" stroke-opacity=".3" stroke-width="2"/><path d="M76 66v-4h68v4" stroke="#9AA3B8" stroke-width="4"/>'+[0,1,2,3].map(k=>'<rect x="82" y="'+(84+k*30)+'" width="56" height="16" rx="2" fill="#9FC4E6"/>').join('');
+    s+='<rect x="70" y="66" width="80" height="140" fill="#C9BBB3" stroke="#12235A" stroke-opacity=".3" stroke-width="2"/><path d="M76 66v-4h68v4" stroke="#9AA3B8" stroke-width="4" fill="none"/>'+[0,1,2,3].map(k=>'<rect x="82" y="'+(84+k*30)+'" width="56" height="16" rx="2" fill="#9FC4E6"/>').join('');
     s+='<path d="M0 190h60M640 190h-30" stroke="#B9794A" stroke-width="5"/>'+Z.arvore(600,196,1.1)+'<g transform="translate(40 300)"><ellipse cx="0" cy="18" rx="22" ry="4" fill="#12235A" opacity=".15"/><path d="M-16 16q-2-18 8-22q4-10 12-4q10-2 12 8q8 4 2 18Z" fill="#C99A5E" stroke="#12235A" stroke-opacity=".3"/><circle cx="12" cy="-4" r="7" fill="#C99A5E" stroke="#12235A" stroke-opacity=".3"/><circle cx="14" cy="-6" r="1.4" fill="#12235A"/><path d="M5-10l-3-6 6 3" fill="#8A6A45"/></g>';
     return s; };
   const desenha=()=>fundo()+L.map((l,k)=>l.d({ok:!!feito[k]})).join('')+L.map((l,k)=>feito[k]?'<g><circle cx="'+(l.x+24)+'" cy="'+(l.y-24)+'" r="12" fill="#24883E" stroke="#fff" stroke-width="2"/><path d="M'+(l.x+18)+' '+(l.y-24)+'l4 4 8-8" stroke="#fff" stroke-width="3" fill="none"/></g>':'').join('');
@@ -5072,7 +5072,7 @@ const e11Cama=(x,y,s,o)=>{ const Z=Z10; o=o||{}; return '<g transform="translate
     s+=Z.casa(20,206,120,86,{parede:'#FFF1D6'})+Y.caixa(122,118,.55,{ok:1})+Z.casa(250,206,110,76,{telhado:'escuro',parede:'#E3F2FF'})+Z.predio(400,206,90,150,{cor:'#C9BBB3'})+Z.casa(520,206,120,80,{parede:'#FFE3C8'});
     s+=Y.calha(250,132,110,{ok:1});
     // pessoas e ações
-    s+=Z.adulto(160,232,.9,{roupa:'#7A4BC2',pele:Z.PELES[1],tipo:'rabo'})+Y.vaso(190,232,.7,{areia:1})+Z.crianca(214,236,.85,{pose:'maos',roupa:'#FFC83D',pele:Z.PELES[2],tipo:'cacheado'})+'<path d="M200 196q8-8 18 0" stroke="#E8C48A" stroke-width="5" stroke-dasharray="2 4"/>';
+    s+=Z.adulto(160,232,.9,{roupa:'#7A4BC2',pele:Z.PELES[1],tipo:'rabo'})+Y.vaso(190,232,.7,{areia:1})+Z.crianca(226,236,.85,{pose:'aponta',vira:1,roupa:'#FFC83D',pele:Z.PELES[2],tipo:'cacheado'});
     s+=Y.garrafa(300,236,.8,{ok:1})+Y.garrafa(318,236,.8,{ok:1})+Z.crianca(350,238,.85,{pose:'aponta',vira:1,roupa:'#22A565',pele:Z.PELES[0],tipo:'trancas',cab:'#8A4B1F'});
     s+=Y.agente(470,240,.9,{pele:Z.PELES[3]})+Z.adulto(510,240,.85,{roupa:'#2E7BF6',pele:Z.PELES[4],vira:1});
     s+=Y.balde(560,240,.8,{virado:1})+Y.pneu(600,244,.7,{ok:1});
