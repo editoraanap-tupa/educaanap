@@ -3479,7 +3479,7 @@ p.e9pj-seg{margin:14px 0 0;max-width:none}
     <p style="margin:0"><a class="btn sol" href="#mosquito">Começar o passeio</a></p>
   </div>
   <div class="paisagem-box">
-    <svg class="paisagem" id="capaArte" viewBox="0 0 720 300" role="img" aria-label="Um bairro em dia de mutirão contra a dengue. Uma família tampa a caixa-d'água, uma criança coloca areia no prato do vaso, outra vira as garrafas de boca para baixo, uma agente de combate às endemias conversa com um morador e um caminhão de coleta recolhe os resíduos. No céu, um mosquito Aedes aegypti foge assustado."></svg>
+    <svg class="paisagem" id="capaArte" viewBox="0 0 720 300" role="img" aria-label="Um bairro em dia de mutirão contra a dengue, com a faixa “Água parada, não!”. A caixa-d'água está tampada, uma mãe e uma criança colocam areia no prato do vaso, outra criança comemora as garrafas guardadas de boca para baixo, uma agente de combate às endemias conversa com um morador e o caminhão da coleta passa na rua. No céu, um mosquito Aedes aegypti foge assustado."></svg>
   </div>
   <svg class="div" style="margin-top:-28px;position:relative" viewBox="0 0 1200 54" preserveAspectRatio="none" aria-hidden="true"><path class="d2" d="M0 16C160 -8 380 46 620 14S1040 -2 1200 20V54H0Z"/><path d="M0 27C200 54 400 0 600 27S1000 54 1200 27V54H0Z"/></svg>
 </section>
@@ -5856,23 +5856,32 @@ const e11Cama=(x,y,s,o)=>{ const Z=Z10; o=o||{}; return '<g transform="translate
 (function(){
   const Z=Z10, Y=Z11, K=Z.K;
   const capa=$('capaArte');
-  if(capa){ let s='<defs><linearGradient id="e11gCeu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#A8E6CF"/><stop offset="1" stop-color="#E8FBF3"/></linearGradient></defs>';
-    s+='<rect width="720" height="300" fill="url(#e11gCeu)"/>'+Z.nuvem(80,20,.8)+Z.nuvem(520,8,1);
-    s+='<path d="M0 150q120-30 240-10t240 0 240-14V300H0Z" fill="#7FD3A6"/><rect y="200" width="720" height="100" fill="#9ED89A"/><rect y="250" width="720" height="50" fill="#7C8296"/><path d="M0 274h720" stroke="#fff" stroke-width="3" stroke-dasharray="22 16"/>';
-    // casas
-    s+=Z.casa(20,206,120,86,{parede:'#FFF1D6'})+Y.caixa(122,118,.55,{ok:1})+Z.casa(250,206,110,76,{telhado:'escuro',parede:'#E3F2FF'})+Z.predio(400,206,90,150,{cor:'#C9BBB3'})+Z.casa(520,206,120,80,{parede:'#FFE3C8'});
-    s+=Y.calha(250,132,110,{ok:1});
-    // pessoas e ações
-    s+=Z.adulto(160,232,.9,{roupa:'#7A4BC2',pele:Z.PELES[1],tipo:'rabo'})+Y.vaso(190,232,.7,{areia:1})+Z.crianca(226,236,.85,{pose:'aponta',vira:1,roupa:'#FFC83D',pele:Z.PELES[2],tipo:'cacheado'});
-    s+=Y.garrafa(300,236,.8,{ok:1})+Y.garrafa(318,236,.8,{ok:1})+Z.crianca(350,238,.85,{pose:'aponta',vira:1,roupa:'#22A565',pele:Z.PELES[0],tipo:'trancas',cab:'#8A4B1F'});
-    s+=Y.agente(470,240,.9,{pele:Z.PELES[3]})+Z.adulto(510,240,.85,{roupa:'#2E7BF6',pele:Z.PELES[4],vira:1});
-    s+=Y.balde(560,240,.8,{virado:1})+Y.pneu(600,244,.7,{ok:1});
-    // caminhão de coleta
-    s+='<g transform="translate(620 278)"><rect x="-60" y="-40" width="64" height="34" rx="4" fill="#22A565" '+K+'/><path d="M4-32h18l12 12v14H4Z" fill="#22A565" '+K+'/><path d="M8-28h12l8 8H8Z" fill="#CFEFFF"/><circle cx="-40" cy="-4" r="8" fill="#12235A"/><circle cx="18" cy="-4" r="8" fill="#12235A"/><path d="M-36-30l6 8h-12Z" fill="#fff"/><text x="-28" y="-12" text-anchor="middle" font-size="8" font-weight="800" fill="#fff" font-family="Baloo 2,sans-serif">COLETA</text></g>';
-    // mosquito fugindo
-    s+='<g class="z11-voa">'+Y.aedes(360,60,1.1,{feliz:false})+'<path d="M300 56h-30M306 70h-40M302 44h-22" stroke="#12235A" stroke-width="3" stroke-linecap="round" opacity=".4"/><path d="M392 38q6 8 0 12q-6-4 0-12Z" fill="#7CCBFF" stroke="#1B56C4" stroke-width="1.4"/></g>';
-    // faixa
-    s+='<g transform="translate(570 120) rotate(-4)"><rect x="-88" y="-18" width="176" height="34" rx="6" fill="#fff" stroke="#C2412D" stroke-width="3"/><text x="0" y="5" text-anchor="middle" font-size="15" font-weight="800" font-family="Baloo 2,sans-serif" fill="#C2412D">ÁGUA PARADA, NÃO!</text></g>';
+  if(capa){ const G=G11, C1=G.C1, P=G.PELES;
+    let s='<defs><linearGradient id="e11gCeu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9FE3CC"/><stop offset="1" stop-color="#EAFBF4"/></linearGradient></defs>';
+    s+='<rect width="720" height="300" fill="url(#e11gCeu)"/>'+Z.sol(676,36,15)+Z.nuvem(26,14,.9)+Z.nuvem(584,58,.7)+Z.nuvem(150,62,.5);
+    s+=G.morros(720,150,'#8FDDB4','#7FD3A6')+G.gramado(720,196,60,'#A6DE96');
+    /* faixa do mutirão, em duas varas */
+    s+='<path d="M196 216V36M404 216V36" stroke="#B9794A" stroke-width="5" stroke-linecap="round"/><path d="M196 40Q300 32 404 40V72Q300 64 196 72Z" fill="#fff" stroke="#C2412D" stroke-width="3" stroke-linejoin="round"/><path d="M204 46q96 -7 192 0" stroke="#F7C9B0" stroke-width="2" fill="none"/><text x="300" y="61" text-anchor="middle" font-size="16.5" font-weight="800" font-family="Baloo 2,sans-serif" fill="#C2412D">ÁGUA PARADA, NÃO!</text><g fill="#FFC83D" '+C1+'><circle cx="196" cy="35" r="5"/><circle cx="404" cy="35" r="5"/></g>';
+    /* casas e prédio */
+    s+=Z.arvore(8,216,2.3,{tipo:'ipe'})+Z.arvore(712,216,2.4);
+    s+=G.casa(22,214,150,92,{telhado:'lado',th:34,inc:34,parede:'#FFF1D6',cor:'#E8855A',janelas:[[14,26,34,34,{cortina:'#FFC83D'}],[102,26,34,34,{cortina:'#FFC83D',floreira:1}]],px:60,dw:30,dh:58});
+    s+='<rect x="74" y="80" width="50" height="9" rx="2" fill="#C9C3BC" '+C1+'/>'+Y.caixa(99,80,.78,{ok:1})+'<path d="M131 52l2.4 6.6 6.6 2.4 -6.6 2.4 -2.4 6.6 -2.4 -6.6 -6.6 -2.4 6.6 -2.4Z" fill="#fff"/>';
+    s+=G.casa(236,214,132,82,{telhado:'duas',cor:'#5B6590',parede:'#E6F3FF',calha:'ok',janelas:[[12,26,32,32,{cortina:'#FF8A7A'}],[88,26,32,32,{cortina:'#FF8A7A'}]],dw:28,dh:56});
+    s+=Z.predio(422,214,88,122,{cor:'#DCCDC2',semente:1})+'<rect x="455" y="182" width="22" height="32" rx="2" fill="#8A5630" '+C1+'/>';
+    s+=G.casa(548,214,150,88,{telhado:'duas',cor:'#E8855A',parede:'#FFE3C8',chamine:1,janelas:[[14,26,34,34,{venez:'#2E9E6A'}],[104,26,34,34,{venez:'#2E9E6A'}]],dw:30,dh:58});
+    s+=G.cerca(172,216,62,26)+G.cerca(370,216,50,26)+G.cerca(512,216,36,26);
+    /* calçada e rua */
+    s+='<rect y="232" width="720" height="22" fill="#E6DECF"/><g stroke="#D3C9B6" stroke-width="1.2">'+[...Array(19)].map((_,k)=>'<path d="M'+(k*40+10)+' 232l-6 22"/>').join('')+'</g><rect y="252" width="720" height="5" fill="#B9B1A2"/><rect y="257" width="720" height="43" fill="#7C8296"/><path d="M0 280h720" stroke="#fff" stroke-width="3" stroke-dasharray="22 16"/>';
+    /* quem cuida: areia no vaso, garrafas viradas, agente e morador */
+    s+=G.lixeira(118,248,.8,'#22A565')+G.lixeira(142,248,.8,'#2E7BF6')+G.arbusto(54,222,.8)+G.flor(196,230,'#FF6B9A')+G.flor(412,230,'#FFC83D')+G.flor(534,230,'#fff');
+    s+=G.pessoa(182,246,.4,{adulto:1,tipo:'rabo',pele:P[1],roupa:'#7A4BC2',calca:'#42507F',expr:'feliz',bd:'frente'})+Y.vaso(222,246,1.15,{areia:1})+G.pessoa(262,248,.4,{tipo:'cacheado',pele:P[2],roupa:'#FFC83D',expr:'feliz',be:'frente',manga:'curta',maoE:'<path d="M-2 0l-12 10" stroke="#8A5630" stroke-width="3" stroke-linecap="round"/><path d="M-20 6l10 10 -7 5 -8 -8Z" fill="#9AA3B8" '+C1+'/>'});
+    s+='<rect x="296" y="234" width="46" height="12" rx="3" fill="#FFC83D" '+C1+'/>'+Y.garrafa(308,240,.9,{ok:1})+Y.garrafa(330,240,.9,{ok:1})+'<rect x="296" y="238" width="46" height="9" rx="3" fill="#F2A900" '+C1+'/>'+G.pessoa(374,248,.4,{tipo:'trancas',cab:'#8A4B1F',pele:P[0],roupa:'#22A565',saia:'#12235A',expr:'feliz',bd:'cima',be:'cima',manga:'curta'});
+    s+=G.pessoa(446,248,.42,{adulto:1,tipo:'rabo',pele:P[3],roupa:'#2E7BF6',calca:'#42507F',colete:true,bone:'#1E9E5A',emblema:1,expr:'fala',bd:'frente',be:'segura',manga:'curta',maoE:'<g transform="translate(-6 6)"><rect x="-13" y="-16" width="26" height="32" rx="3" fill="#B9794A" '+C1+'/><rect x="-10" y="-11" width="20" height="24" fill="#fff"/><path d="M-6 -4h12M-6 3h12" stroke="#9AA3B8" stroke-width="2"/></g>'})+G.pessoa(500,248,.42,{adulto:1,tipo:'curto',pele:P[4],roupa:'#FF8A3D',calca:'#42507F',expr:'sorriso',manga:'curta',vira:1,bd:'cintura'});
+    s+=Y.balde(548,246,1.05,{virado:1})+G.cachorro(86,250,.42,{lingua:1});
+    /* caminhão da coleta */
+    s+='<g transform="translate(646 294) scale(1.18)"><ellipse cx="-4" cy="2" rx="54" ry="4.6" fill="#000" opacity=".16"/><path d="M-52 -8v-32q0 -6 6 -6h48q6 0 6 6v32Z" fill="#22A565" '+C1+'/><path d="M-52 -26l-10 6v12h10" fill="#157A44" '+C1+'/><path d="M8 -8v-30h20l13 15v15Z" fill="#fff" '+C1+'/><path d="M14 -33h12l9 11h-21Z" fill="#9FD4F5"/><path d="M-22 -41l6.4 8h-4v4.4h-4.8v-4.4h-4Z" fill="#fff"/><text x="-22" y="-15" text-anchor="middle" font-size="8.4" font-weight="800" fill="#fff" font-family="Baloo 2,sans-serif">COLETA</text><circle cx="-32" cy="-6" r="8.4" fill="#12235A"/><circle cx="-32" cy="-6" r="3.2" fill="#C9D3EA"/><circle cx="26" cy="-6" r="8.4" fill="#12235A"/><circle cx="26" cy="-6" r="3.2" fill="#C9D3EA"/><rect x="37" y="-19" width="4" height="5" fill="#FFE27A"/></g>';
+    /* mosquito fugindo */
+    s+='<g class="z11-voa">'+Y.aedes(500,52,.95,{feliz:false})+'<path d="M446 48h-22M450 62h-30M448 36h-16" stroke="#12235A" stroke-width="3" stroke-linecap="round" opacity=".4"/><path d="M530 30q6 8 0 12q-6 -4 0 -12Z" fill="#7CCBFF" stroke="#1B56C4" stroke-width="1.4"/></g>';
     capa.innerHTML=s; }
   const ARTE={
     1:()=>'<circle cx="360" cy="250" r="190" fill="#17A398" opacity=".25"/>'+Z.arvore(120,200,1.6)+Z.arvore(620,200,1.4,{tipo:'ipe'})+'<g transform="translate(360 108)"><circle r="70" fill="#E8F6FF" fill-opacity=".85" stroke="#12235A" stroke-width="8"/>'+Y.aedes(0,0,1.9,{})+'<path d="M50 50l46 46" stroke="#8A5630" stroke-width="16" stroke-linecap="round"/></g>',
@@ -5880,7 +5889,7 @@ const e11Cama=(x,y,s,o)=>{ const Z=Z10; o=o||{}; return '<g transform="translate
     3:()=>Z.casa(250,200,220,130,{})+Y.calha(250,70,220,{ok:1})+Y.vaso(140,200,1.6,{areia:1})+Y.garrafa(560,200,1.6,{ok:1})+Y.garrafa(600,200,1.6,{ok:1})+Y.balde(660,200,1.5,{virado:1})+Y.pneu(60,200,1.4,{ok:1}),
     4:()=>Z.predio(40,200,80,150,{cor:'#B5A8E0'})+Z.predio(130,200,70,110,{cor:'#C9BBB3'})+'<rect x="250" y="80" width="220" height="120" fill="#FFF1D6" '+K+'/><path d="M236 84L360 30l124 54Z" fill="#7A4BC2" '+K+'/><text x="360" y="120" text-anchor="middle" font-size="22" font-weight="800" font-family="Baloo 2,sans-serif" fill="#7A4BC2">ESCOLA</text><rect x="340" y="140" width="40" height="60" fill="#8A5630"/>'+Z.predio(540,200,70,130,{cor:'#9FC4E6'})+Z.predio(620,200,90,100,{cor:'#C9BBB3'}),
     5:()=>'<rect x="250" y="70" width="220" height="130" fill="#fff" '+K+'/><path d="M234 74L360 20l126 54Z" fill="#22A565" '+K+'/><path d="M360 96v60M330 126h60" stroke="#E5482B" stroke-width="18"/>'+Z.termometro(150,150,70,.7,'#E5482B')+'<path d="M600 160c-30-20-40-40-28-56 10-12 24-8 28 4 4-12 18-16 28-4 12 16 2 36-28 56Z" fill="#FF6B5A" '+K+'/>'+Z.arvore(80,200,1.2),
-    6:()=>{ let s=''; [0,1,2,3,4,5,6,7].forEach(k=>{ const x=70+k*84; s+=k%2?Z.adulto(x,200,1.2,{roupa:['#E5482B','#2E7BF6','#7A4BC2','#22A565'][k%4],pele:Z.PELES[k%5]}):Z.crianca(x,200,1.3,{pose:'maos',roupa:['#FFC83D','#FF6B5A','#22A565','#2E7BF6'][k%4],pele:Z.PELES[(k+2)%5],tipo:['cacheado','trancas','curto','rabo'][k%4]}); }); return '<g transform="translate(360 70) rotate(-2)"><path d="M-230-26h460v52h-460Z" fill="#fff" stroke="#C2412D" stroke-width="5"/><path d="M-230-26l-24 26 24 26M230-26l24 26-24 26" fill="#C2412D"/><text y="12" text-anchor="middle" font-size="32" font-weight="800" font-family="Baloo 2,sans-serif" fill="#C2412D">TODOS CONTRA A DENGUE!</text></g>'+s; }};
+    6:()=>{ const G=G11, P=G.PELES; let s=''; [0,1,2,3,4,5,6,7].forEach(k=>{ const x=70+k*84; s+=k%2?G.pessoa(x,200,.5,{adulto:1,roupa:['#E5482B','#2E7BF6','#7A4BC2','#22A565'][k%4],pele:P[k%5],tipo:['coque','curto','liso','topete'][(k>>1)%4],expr:'feliz',bd:'cima',manga:'curta'}):G.pessoa(x,200,.52,{roupa:['#FFC83D','#FF6B5A','#22A565','#2E7BF6'][k%4],pele:P[(k+2)%5],tipo:['cacheado','trancas','franja','marias'][(k>>1)%4],expr:'feliz',bd:'cima',be:'cima',manga:'curta'}); }); return '<g transform="translate(360 44) rotate(-2)"><path d="M-230-26h460v52h-460Z" fill="#fff" stroke="#C2412D" stroke-width="5"/><path d="M-230-26l-24 26 24 26M230-26l24 26-24 26" fill="#C2412D"/><text y="12" text-anchor="middle" font-size="32" font-weight="800" font-family="Baloo 2,sans-serif" fill="#C2412D">TODOS CONTRA A DENGUE!</text></g>'+s; }};
   document.querySelectorAll('svg.e11-arte').forEach(sv=>{ const f=ARTE[sv.dataset.arte]; if(f) sv.innerHTML=f(); });
 })();
 
