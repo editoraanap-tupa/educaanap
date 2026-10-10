@@ -18,3 +18,13 @@ export const TROCAS = [
   ['foram feitos para esta página', 'foram feitos para esta atividade'],
   ['foram escritos para esta página', 'foram escritos para esta atividade'],
 ];
+
+// Página inicial do app: os quadros Fichas, BNCC, voz e aparelho vão para
+// depois da lista de trilhas; o título "Para educadores e famílias" fica no lugar.
+export function ajustarInicio(html) {
+  const grade = '<div class="ab-g" id="abG"></div>';
+  const lista = '<div class="acts" id="acts"></div>';
+  if (html.split(grade).length !== 2 || !html.includes(lista)) throw new Error('index.html: não achei os quadros ou a lista de atividades');
+  html = html.replace(grade, '');
+  return html.replace(lista, lista + '\n  <section class="about">' + grade + '</section>');
+}
