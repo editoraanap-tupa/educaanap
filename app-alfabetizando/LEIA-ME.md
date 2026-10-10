@@ -10,7 +10,7 @@ App para a Google Play feito a partir do "Brincando com as Letras"
   "Chame um adulto"; o adulto responde uma conta simples e chega à tela de compra.
 - A compra é **única** ("Trilhas completas") e libera tudo, para sempre, na conta Google.
   O botão "Já comprei: restaurar" recupera a compra num celular novo.
-- Na página inicial aparece o botão "Liberar todas as trilhas" até a compra ser feita.
+- Na página inicial, acima da lista de trilhas, aparece uma faixa "Liberar tudo" até a compra ser feita.
 
 ## Pastas
 

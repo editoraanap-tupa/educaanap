@@ -65,8 +65,10 @@
     '.alf-msg{min-height:1.2em;font-size:15px;color:#c0392b;margin:8px 0 0}' +
     '.stop.alf-pago .pad{filter:grayscale(.75);opacity:.75}' +
     '.stop.alf-pago .lockb{display:none}' +
-    '.stop.alf-pago .alf-cad{position:absolute;top:-12px;right:-12px;width:44px;height:44px;border-radius:50%;background:#FFC531;border:3px solid #fff;display:grid;place-items:center;font-size:24px;box-shadow:0 3px 0 rgba(31,42,68,.25)}' +
-    '.alf-hub{position:fixed;left:50%;bottom:16px;translate:-50% 0;z-index:9000;font:800 16px/1.2 Nunito,sans-serif;padding:12px 18px;border-radius:999px;border:0;background:#2490D6;color:#fff;box-shadow:0 5px 0 rgba(31,42,68,.25)}';
+    '.stop.alf-pago .alf-cad{position:absolute;z-index:3;top:-14px;left:calc(50% + 18px);width:44px;height:44px;border-radius:50%;background:#FFC531;border:3px solid #fff;display:grid;place-items:center;font-size:24px;box-shadow:0 3px 0 rgba(31,42,68,.25)}' +
+    '.alf-hub{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 18px;padding:14px 16px;border-radius:22px;background:#FFF4CC;border:3px solid #FFC531;color:#1f2a44;font-family:Nunito,system-ui,sans-serif}' +
+    '.alf-hub-ic{font-size:34px}.alf-hub-tx{flex:1 1 180px;display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.35}.alf-hub-tx b{font-size:17px}' +
+    '.alf-hub .alf-b{width:auto;margin:0;padding:12px 20px}';
   function estilo() { if (document.getElementById('alfCss')) return; var s = document.createElement('style'); s.id = 'alfCss'; s.textContent = CSS; document.head.appendChild(s); }
 
   var aviso = null;
@@ -155,7 +157,8 @@
       var pago = !livre && idx >= GRATIS;
       b.classList.toggle('alf-pago', pago);
       var cad = b.querySelector('.alf-cad');
-      if (pago && !cad) { var pad = b.querySelector('.pad'); if (pad) pad.appendChild(el('span', 'alf-cad', '🔒')); }
+      // o cadeado fica fora do .pad, que a página deixa cinza quando trancado
+      if (pago && !cad) b.appendChild(el('span', 'alf-cad', '🔒'));
       if (!pago && cad) cad.remove();
     });
   }
@@ -179,11 +182,18 @@
     return true;
   }
 
-  // Na página inicial: botão para o adulto liberar tudo de uma vez.
+  // Na página inicial: faixa acima da lista de atividades para o adulto liberar tudo.
   function instalarInicio() {
-    if (liberado()) return;
-    var b = el('button', 'alf-hub', '🔓 Liberar todas as trilhas'); b.id = 'alfBtnHub'; b.type = 'button'; b.onclick = abrirAviso;
-    document.body.appendChild(b);
+    var lista = document.getElementById('acts');
+    if (liberado() || !lista) return;
+    var f = el('div', 'alf-hub'); f.id = 'alfBtnHub';
+    f.appendChild(el('span', 'alf-hub-ic', '🔓'));
+    var t = el('div', 'alf-hub-tx');
+    t.appendChild(el('b', null, 'Itens 1 e 2 de cada trilha são grátis'));
+    t.appendChild(el('span', null, 'Libere as 10 trilhas completas com uma compra única de ' + PRECO_PADRAO + '.'));
+    f.appendChild(t);
+    var b = el('button', 'alf-b', 'Liberar tudo'); b.type = 'button'; b.onclick = abrirAviso; f.appendChild(b);
+    lista.parentNode.insertBefore(f, lista);
   }
 
   estilo();
