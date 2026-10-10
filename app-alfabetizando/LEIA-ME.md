@@ -49,6 +49,7 @@ Guarde bem a chave de assinatura: sem ela não dá para publicar atualizações.
 2. Criar o app com o pacote `br.org.educaanap.alfabetizando`, gratuito para baixar.
 3. Enviar o `.aab` para o teste interno (a compra só aparece depois do primeiro envio).
 4. Em **Monetizar > Produtos > Produtos no app**, criar o produto com ID
-   `trilhas_completas`, definir o preço e ativar.
+   `trilhas_completas`, preço **R$ 19,90** (compra única) e ativar.
+   Se o preço mudar, troque também `PRECO_PADRAO` no `web/premium.js`.
 5. Preencher o público-alvo (crianças), a política de privacidade e a classificação de conteúdo.
 6. Adicionar seu e-mail como "testador de licença" para testar a compra sem pagar.

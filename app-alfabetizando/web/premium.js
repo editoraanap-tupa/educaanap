@@ -8,6 +8,7 @@
   var PRODUTO = 'trilhas_completas';   // mesmo ID cadastrado no Play Console
   var GRATIS = 2;                      // itens abertos por trilha
   var CHAVE = 'alf:premium';
+  var PRECO_PADRAO = 'R$ 19,90';       // preço cadastrado no Play Console; a loja manda o valor oficial
 
   function liberado() { try { return localStorage.getItem(CHAVE) === '1'; } catch (e) { return false; } }
   function marcarLiberado() {
@@ -46,7 +47,7 @@
   function temCompra(store) { var p = store.get(PRODUTO); return !!(p && p.owned); }
   function preco() {
     var p = loja && loja.get(PRODUTO), o = p && p.getOffer();
-    return o && o.pricingPhases && o.pricingPhases[0] ? o.pricingPhases[0].price : '';
+    return o && o.pricingPhases && o.pricingPhases[0] ? o.pricingPhases[0].price : PRECO_PADRAO;
   }
 
   /* ---------- Aviso de compra, com pergunta para o adulto ---------- */
@@ -71,7 +72,11 @@
   var aviso = null;
   function fecharAviso() { if (aviso) { aviso.remove(); aviso = null; } }
   function el(tag, cls, txt) { var n = document.createElement(tag); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; }
-  function mostrarPreco() { var n = aviso && aviso.querySelector('.alf-preco'); if (n) n.textContent = preco() ? 'Pagamento único: ' + preco() : ''; }
+  function mostrarPreco() {
+    var n = aviso && aviso.querySelector('.alf-preco'), b = aviso && aviso.querySelector('.alf-comprar');
+    if (n) n.textContent = 'Pagamento único de ' + preco() + ', sem assinatura.';
+    if (b) b.textContent = 'Liberar tudo por ' + preco();
+  }
 
   function abrirAviso() {
     estilo(); fecharAviso(); iniciarLoja();
@@ -110,7 +115,7 @@
     cx.appendChild(el('p', null, 'Os itens 1 e 2 de cada trilha são grátis para conhecer. Com uma compra única, as 10 trilhas ficam liberadas por completo, para sempre, nesta conta Google.'));
     cx.appendChild(el('p', 'alf-preco'));
     var msg = el('div', 'alf-msg');
-    var comprar = el('button', 'alf-b', 'Comprar e liberar tudo'); comprar.type = 'button';
+    var comprar = el('button', 'alf-b alf-comprar'); comprar.type = 'button';
     var restaurar = el('button', 'alf-b sec', 'Já comprei: restaurar'); restaurar.type = 'button';
     var fechar = el('button', 'alf-b ter', 'Agora não'); fechar.type = 'button'; fechar.onclick = fecharAviso;
     comprar.onclick = function () {

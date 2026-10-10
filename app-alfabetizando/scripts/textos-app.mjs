@@ -10,7 +10,7 @@ export const TROCAS = [
    'Trilha livre: deixar todas as paradas abertas (para a roda com a turma ou para escolher uma atividade). As paradas com cadeado amarelo só abrem depois da compra.'],
   // Página inicial
   ['Sem cadastro, sem anúncios e sem coleta de dados das crianças.',
-   'Itens 1 e 2 de cada trilha grátis; o restante com compra única, sem assinatura. Sem anúncios e sem coleta de dados das crianças.'],
+   'Itens 1 e 2 de cada trilha grátis; o restante com uma compra única de R$ 19,90, sem assinatura. Sem anúncios e sem coleta de dados das crianças.'],
   // "página" vira "atividade" / "início" no app
   ['ao abrir a página', 'ao abrir a atividade'],
   ['Voltar para a página principal', 'Voltar para o início'],
