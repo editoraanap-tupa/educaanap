@@ -6,7 +6,7 @@ Textos e respostas para copiar no Play Console.
 
 - **Nome do app** (até 30 caracteres): Alfabetizando
 - **Descrição curta** (até 80 caracteres):
-  Brincadeiras com letras para crianças de 4 e 5 anos. Itens 1 e 2 grátis.
+  Brincadeiras com letras para crianças de 4 e 5 anos. Itens 1, 2 e 3 grátis.
 - **Categoria:** Educação
 - **E-mail de contato:** mundo.encantado.prof@gmail.com
 - **Site:** https://mundoencantadoeduca.com.br
@@ -42,7 +42,7 @@ PARA EDUCADORES E FAMÍLIAS
 • Acessibilidade: velocidade da voz, letras maiores e menos movimento.
 
 GRÁTIS PARA CONHECER
-Os itens 1 e 2 de cada trilha são gratuitos. Com uma compra única de R$ 19,90, sem assinatura, as 10 trilhas ficam liberadas por completo. Antes da compra, o app faz uma pergunta para um adulto responder.
+Os itens 1, 2 e 3 de cada trilha são gratuitos. Com uma compra única de R$ 19,90, sem assinatura, as 10 trilhas ficam liberadas por completo. Antes da compra, o app faz uma pergunta para um adulto responder.
 
 SEM ANÚNCIOS E SEM COLETA DE DADOS
 Não há cadastro nem anúncios. O nome da criança e o avanço ficam guardados só no aparelho.

@@ -1,12 +1,12 @@
 /* Alfabetizando (app Android): bloqueio das trilhas e compra dentro do app.
-   Regra: em cada trilha, os itens 1 e 2 ficam abertos; do item 3 em diante
+   Regra: em cada trilha, os itens 1, 2 e 3 ficam abertos; do item 4 em diante
    aparece um cadeado até a compra única "Trilhas completas" na Google Play.
    Este arquivo é injetado no fim de cada página pelo scripts/montar-www.mjs. */
 (function () {
   'use strict';
 
   var PRODUTO = 'trilhas_completas';   // mesmo ID cadastrado no Play Console
-  var GRATIS = 2;                      // itens abertos por trilha
+  var GRATIS = 3;                      // itens abertos por trilha
   var CHAVE = 'alf:premium';
   var PRECO_PADRAO = 'R$ 19,90';       // preço cadastrado no Play Console; a loja manda o valor oficial
 
@@ -114,7 +114,7 @@
     cx.innerHTML = '';
     cx.appendChild(el('div', 'alf-ic', '🎁'));
     cx.appendChild(el('h2', null, 'Libere todas as trilhas'));
-    cx.appendChild(el('p', null, 'Os itens 1 e 2 de cada trilha são grátis para conhecer. Com uma compra única, as 10 trilhas ficam liberadas por completo, para sempre, nesta conta Google.'));
+    cx.appendChild(el('p', null, 'Os itens 1, 2 e 3 de cada trilha são grátis para conhecer. Com uma compra única, as 10 trilhas ficam liberadas por completo, para sempre, nesta conta Google.'));
     cx.appendChild(el('p', 'alf-preco'));
     var msg = el('div', 'alf-msg');
     var comprar = el('button', 'alf-b alf-comprar'); comprar.type = 'button';
@@ -147,7 +147,7 @@
     return i >= GRATIS;
   }
 
-  // Cadeado nas paradas do mapa (do item 3 em diante).
+  // Cadeado nas paradas do mapa (do item 4 em diante).
   function atualizarMapa() {
     var G = jogos(); if (!G) return;
     var livre = liberado();
@@ -195,7 +195,7 @@
     var f = el('div', 'alf-hub'); f.id = 'alfBtnHub';
     f.appendChild(el('span', 'alf-hub-ic', '🔓'));
     var t = el('div', 'alf-hub-tx');
-    t.appendChild(el('b', null, 'Itens 1 e 2 de cada trilha são grátis'));
+    t.appendChild(el('b', null, 'Itens 1, 2 e 3 de cada trilha são grátis'));
     t.appendChild(el('span', null, 'Libere as 10 trilhas completas com uma compra única de ' + PRECO_PADRAO + '.'));
     f.appendChild(t);
     var b = el('button', 'alf-b', 'Liberar tudo'); b.type = 'button'; b.onclick = abrirAviso; f.appendChild(b);

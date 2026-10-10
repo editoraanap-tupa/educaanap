@@ -5,8 +5,8 @@ App para a Google Play feito a partir do "Brincando com as Letras"
 
 ## Como funciona o bloqueio
 
-- Em cada uma das 10 trilhas, os **itens 1 e 2 ficam abertos** para a família conhecer.
-- Do item 3 em diante aparece um **cadeado amarelo**. Ao tocar, a criança vê
+- Em cada uma das 10 trilhas, os **itens 1, 2 e 3 ficam abertos** para a família conhecer.
+- Do item 4 em diante aparece um **cadeado amarelo**. Ao tocar, a criança vê
   "Chame um adulto"; o adulto responde uma conta simples e chega à tela de compra.
 - A compra é **única** ("Trilhas completas") e libera tudo, para sempre, na conta Google.
   O botão "Já comprei: restaurar" recupera a compra num celular novo.
