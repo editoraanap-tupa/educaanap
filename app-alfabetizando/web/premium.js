@@ -156,6 +156,12 @@
       G.forEach(function (g, i) { if (rot.indexOf(g.t) === 0 && g.t.length > maior) { maior = g.t.length; idx = i; } });
       var pago = !livre && idx >= GRATIS;
       b.classList.toggle('alf-pago', pago);
+      // Itens grátis ficam abertos desde o início, sem esperar o anterior.
+      if (idx >= 0 && idx < GRATIS && b.classList.contains('locked')) {
+        b.classList.remove('locked', 'pending');
+        var lk = b.querySelector('.lockb'); if (lk) lk.remove();
+        b.setAttribute('aria-label', G[idx].t);
+      }
       var cad = b.querySelector('.alf-cad');
       // o cadeado fica fora do .pad, que a página deixa cinza quando trancado
       if (pago && !cad) b.appendChild(el('span', 'alf-cad', '🔒'));
