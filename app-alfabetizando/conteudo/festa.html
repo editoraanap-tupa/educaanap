@@ -6,7 +6,14 @@
 <meta name="description" content="Festa de Aniversário: 16 brincadeiras com o convite, os nomes, os sons e os textos de uma festa para crianças de 4 e 5 anos. Brincando com as Letras, Coleção Mundo Encantado.">
 <meta name="author" content="Profa. Dra. Sandra Medina Benini">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%232490D6'/%3E%3Ctext x='50' y='74' font-family='Arial Rounded MT Bold,Arial,sans-serif' font-weight='700' font-size='70' text-anchor='middle' fill='%23fff'%3EA%3C/text%3E%3C/svg%3E">
-<style>html{-webkit-text-size-adjust:100%}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<style>html{-webkit-text-size-adjust:100%}body{margin:0}[hidden]{display:none!important}img{max-width:100%}
+/* Rodapé: logo em cima e créditos centralizados, sem cortar o e-mail no celular. */
+.foot.cred{flex-direction:column;text-align:center;gap:10px;padding-bottom:88px}
+.fcred{display:flex;flex-direction:column;align-items:center;gap:2px;max-width:100%}
+.fcred .fcol{font-family:"Baloo 2",Nunito,sans-serif;font-weight:800;font-size:19px;color:var(--ink)}
+.foot.cred .flogo{width:104px;height:104px;box-shadow:0 4px 0 rgba(27,42,94,.10)}
+.fcred .sel{font-weight:700}
+</style>
 <title>Festa de Aniversário</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800;900&family=Pacifico&display=swap">
 <style>
@@ -1315,7 +1322,7 @@ html.calmo *,html.calmo *::before,html.calmo *::after{animation-duration:.001s!i
     <div class="map" id="map"></div>
     <div class="fimtrilha" id="fimTrilha" hidden></div>
     <p class="foot">Professoras, professores e famílias: as fichas das atividades de sala, a relação com a BNCC e o ajuste da voz estão em <button type="button" id="footProf">Para educadores</button>. <a href="index.html">Voltar para a página principal</a></p>
-    <p class="foot cred"><img class="flogo" id="footLogo" alt="Coleção Mundo Encantado"> <span>Coleção Mundo Encantado · Elaboração: <button type="button" id="footCred">Profa. Dra. Sandra Medina Benini</button><br>Contato: <span class="sel">mundo.encantado.prof@gmail.com</span></span></p>
+    <p class="foot cred"><img class="flogo" id="footLogo" alt="Coleção Mundo Encantado"> <span class="fcred"><b class="fcol">Coleção Mundo Encantado</b><span>Elaboração: <button type="button" id="footCred">Profa. Dra. Sandra Medina Benini</button></span><span>Contato: <a class="sel" href="mailto:mundo.encantado.prof@gmail.com">mundo.encantado.prof@gmail.com</a></span></span></p>
   </section>
 
   <section id="v-game" hidden>

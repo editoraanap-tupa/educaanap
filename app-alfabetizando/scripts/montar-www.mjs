@@ -1,5 +1,6 @@
 // Monta a pasta www/ do app: copia as páginas do Alfabetizando (conteudo/)
-// e injeta o web/premium.js (bloqueio das trilhas + compra) em cada uma.
+// e injeta o web/premium.js (bloqueio das trilhas + compra) em cada uma,
+// mais o web/abertura.js (enfeites da tela de abertura) na página inicial.
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, rmSync, copyFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -25,8 +26,10 @@ for (const nome of readdirSync(origem).filter(n => n.endsWith('.html'))) {
   for (const [de, para] of TROCAS) if (html.includes(de)) { html = html.split(de).join(para); usadas.add(de); }
   const i = html.lastIndexOf('</body>');
   if (i < 0) throw new Error(`${nome}: não achei </body>`);
-  writeFileSync(join(destino, nome), html.slice(0, i) + tag + '\n' + html.slice(i));
+  const extra = nome === 'index.html' ? '<script src="abertura.js"></script>\n' : '';
+  writeFileSync(join(destino, nome), html.slice(0, i) + tag + '\n' + extra + html.slice(i));
   console.log('ok', nome);
 }
 for (const [de] of TROCAS) if (!usadas.has(de)) throw new Error(`Texto não encontrado no conteúdo: ${de}`);
 copyFileSync(join(raiz, 'web', 'premium.js'), join(destino, 'premium.js'));
+copyFileSync(join(raiz, 'web', 'abertura.js'), join(destino, 'abertura.js'));
