@@ -1,0 +1,4 @@
+# Site educaanap.org.br (GitHub Pages)
+# O app do Alfabetizando é pago: a pasta dele não vai para o site.
+exclude:
+  - app-alfabetizando

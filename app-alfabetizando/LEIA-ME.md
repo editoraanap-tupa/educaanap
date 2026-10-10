@@ -18,8 +18,15 @@ App para a Google Play feito a partir do "Brincando com as Letras"
 |---|---|
 | `conteudo/` | Cópia das 11 páginas do Alfabetizando (index + 10 trilhas), sem mudanças. |
 | `web/premium.js` | Bloqueio dos itens e compra pela Google Play. |
+| `scripts/textos-app.mjs` | Textos ajustados só no app (o conteúdo deixa de ser de acesso livre). |
 | `scripts/montar-www.mjs` | Gera `www/` com as páginas + o bloqueio. |
 | `android/` | Projeto Android (Capacitor), aberto no Android Studio. |
+
+Os textos que falavam de acesso livre são trocados no app por `scripts/textos-app.mjs`
+(por exemplo: "Sem cadastro..." na página inicial e "Como a trilha avança" nas trilhas).
+Se uma frase mudar no site, o `npm run montar` avisa qual delas não foi encontrada.
+
+A pasta `app-alfabetizando/` fica fora do site educaanap.org.br (veja `_config.yml` na raiz).
 
 Para atualizar o conteúdo, copie de novo as páginas do repositório `letras` para `conteudo/`.
 
