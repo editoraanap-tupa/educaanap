@@ -9,8 +9,9 @@ Textos e respostas para copiar no Play Console.
   Brincadeiras com letras para crianças de 4 e 5 anos. Itens 1 e 2 grátis.
 - **Categoria:** Educação
 - **E-mail de contato:** mundo.encantado.prof@gmail.com
-- **Site:** https://educaanap.org.br
-- **Política de privacidade:** https://educaanap.org.br/privacidade-alfabetizando.html
+- **Site:** https://mundoencantadoeduca.com.br
+- **Política de privacidade:** https://mundoencantadoeduca.com.br/privacidade-alfabetizando.html
+  (publicar o arquivo `privacidade-alfabetizando.html`, que está nesta pasta, na raiz do site mundoencantadoeduca.com.br)
 
 ## Descrição completa
 
