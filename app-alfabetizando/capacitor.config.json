@@ -1,0 +1,8 @@
+{
+  "appId": "br.org.educaanap.alfabetizando",
+  "appName": "Alfabetizando",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": false
+  }
+}
