@@ -3375,6 +3375,19 @@ p.e9pj-seg{margin:14px 0 0;max-width:none}
 .fora-lista small{display:inline-block;margin-top:4px;font-size:.76rem;font-weight:700;background:#E2F4FB;border-radius:999px;padding:1px 10px}
 
 @media(max-width:640px){#capaArte .e14-lado{display:none}}
+.js-cad{margin-top:10px;background:#FFFDF5;border:2px solid #12235A;border-radius:16px;padding:10px 12px}
+.js-cad-t{margin:0 0 8px;font-family:"Baloo 2",sans-serif;font-weight:800;color:#7A4B2A}
+.js-pistas{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.js-pistas li{border-radius:12px;padding:6px 8px;border:2px dashed #C9D3EA;display:flex;flex-direction:column;gap:1px;font-size:.85rem;line-height:1.2}
+.js-pistas li b{font-family:"Baloo 2",sans-serif}
+.js-pistas li.vazia{color:#9AA3B8;align-items:center;justify-content:center;min-height:62px}
+.js-pistas li.vazia b{font-size:1.4rem}
+.js-pistas li.doe{border:2px solid #C93A27;background:#FFF0EC}
+.js-pistas li.bem{border:2px solid #24883E;background:#EAF7EE}
+.js-pistas li span{font-weight:700}.js-pistas li.doe span{color:#C93A27}.js-pistas li.bem span{color:#1E7A3C}
+.js-barra{display:inline-block;vertical-align:middle;width:120px;height:10px;border-radius:5px;background:#E2E6F0;margin-left:8px;overflow:hidden}
+.js-barra i{display:block;height:100%;background:#C93A27}
+@media (max-width:640px){.js-pistas{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 <script src="https://vlibras.gov.br/app/vlibras-plugin.js" defer onload="try{new window.VLibras.Widget({rootPath:'https://vlibras.gov.br/app',avatar:'guga',position:'R'});document.documentElement.classList.add('tem-libras')}catch(e){}"></script>
 </head>
@@ -3648,7 +3661,7 @@ p.e9pj-seg{margin:14px 0 0;max-width:none}
       <svg viewBox="0 0 160 196" aria-hidden="true"><use href="#arv"/></svg>
       <div class="balao"><p>Em <b>1854</b>, em Londres, muita gente ficou doente de <b>cólera</b>. O médico <b>John Snow</b> marcou num mapa as casas dos doentes e percebeu que elas ficavam perto de uma <b>bomba d’água</b>. Quando tiraram a alavanca da bomba, a cidade aprendeu que a água contaminada espalha doenças (CDC, 2004).</p></div>
     </div>
-    <div class="jogo b" id="jsJogo"><h3>O mistério da Rua das Bombas 🗺️</h3><p>Você é assistente do doutor Snow! Marque no mapa as <b>12 casas</b> com pessoas doentes. Depois, descubra qual <b>bomba d’água</b> espalha a doença. Acerte com no máximo <b>3 palpites</b> para ganhar a estrela.</p><div class="e10-palco" id="jsPalco"></div><div id="jsPere"></div><p class="e6-nota">O mapa do jogo é um desenho inspirado no mapa de John Snow, e não uma cópia.</p><div class="acoes"><button class="btn leve" id="jsNovo" type="button">Começar de novo</button></div></div>
+    <div class="jogo b" id="jsJogo"><h3>O mistério da Rua das Bombas 🗺️</h3><p>Você é assistente do doutor Snow, um detetive da água! Ouça as <b>6 testemunhas</b> da rua, marque no mapa as <b>8 casas</b> com pessoas doentes e descubra qual <b>bomba d’água</b> espalha a doença. Acerte com no máximo <b>3 palpites</b> para ganhar a estrela.</p><div class="e10-palco" id="jsPalco"></div><div id="jsPere"></div><p class="e6-nota">O mapa do jogo é um desenho inspirado no mapa de John Snow, e não uma cópia.</p><div class="acoes"><button class="btn leve" id="jsNovo" type="button">Começar de novo</button></div></div>
     <div class="fala dir bloco" id="enchente">
       <svg viewBox="0 0 160 196" aria-hidden="true"><use href="#arv-ops"/></svg>
       <div class="balao"><p>Choveu forte e a rua encheu! A água da enchente se mistura com esgoto e com a urina dos ratos. É ali que mora o <b>Lepto</b>, da leptospirose. Nada de brincar nessa água (BRASIL, [s.d.]).</p></div>
@@ -5560,59 +5573,107 @@ function e12Pergunta(quadro,tit,sub,ops,cb){ quadro.hidden=false; quadro.innerHT
 })();
 
 /* =====================================================================
-   edição 14 · Eixo 3: o mistério da Rua das Bombas (inspirado em John Snow, Londres, 1854)
+   edição 14 · Eixo 3: o mistério da Rua Larga (inspirado em John Snow, Londres, 1854)
+   Etapa 0: ouvir 6 testemunhas na rua · Etapa 1: marcar 8 casas no mapa
+   Etapa 2: descobrir a bomba · Etapa 3: tirar a alavanca e ver o gráfico
    ===================================================================== */
 (function(){
-  const palco=$('jsPalco'); if(!palco) return; const M=M14, L=M.L, C=M.C, C1=M.C1, FT=M.FT, pere=e10Pere('jsPere');
+  const palco=$('jsPalco'); if(!palco) return; const M=M14, G=G11, P=G.PELES, L=M.L, C=M.C, C1=M.C1, FT=M.FT, pere=e10Pere('jsPere');
+  /* ---------- a rua (etapa 0) ---------- */
+  const RW=720, RH=400, CHAO=318;
+  const cartola=(x,y,s)=>'<g transform="translate('+x+' '+y+') scale('+s+')"><rect x="-22" y="-44" width="44" height="40" rx="3" fill="#1E2236" '+C+'/><rect x="-22" y="-14" width="44" height="7" fill="#8A2F3A"/><ellipse cx="0" cy="-4" rx="36" ry="7" fill="#1E2236" '+C+'/></g>';
+  const snow=(x,y,s,lev)=>G.pessoa(x,y,s,{adulto:1,tipo:'curto',pele:P[0],cab:'#5B3A1E',roupa:'#2E3B6E',calca:'#1E2236',sapato:'#1E2236',expr:'feliz',bd:'frente',be:lev?'cima':'baixo',maoD:'<g transform="rotate(-10)"><rect x="-10" y="-14" width="20" height="26" rx="2" fill="#F3E7CC" stroke="#12235A" stroke-width="2"/><path d="M-6 -6h12M-6 0h12M-6 6h8" stroke="#9AA3B8" stroke-width="2"/></g>',maoE:lev?'<path d="M0 0l30 -16" stroke="#2F5D50" stroke-width="7" stroke-linecap="round"/>':''})+cartola(x,y-178*s-24*s,s*.95);
+  const bomba=(x,y,s,sem)=>'<g transform="translate('+x+' '+y+') scale('+s+')"><ellipse cx="0" cy="0" rx="34" ry="7" fill="#000" opacity=".15"/><rect x="-26" y="-12" width="52" height="12" rx="3" fill="#6B6F7E" '+C+'/><path d="M-14 -12v-74q0 -14 14 -14t14 14v74Z" fill="#2F5D50" '+C+'/><circle cy="-104" r="11" fill="#2F5D50" '+C+'/><path d="M-14 -60h-22v12" fill="none" stroke="#12235A" stroke-width="10" stroke-linecap="round"/><path d="M-14 -60h-22v12" fill="none" stroke="#2F5D50" stroke-width="6" stroke-linecap="round"/>'+(sem?'<circle cx="14" cy="-78" r="4" fill="#12235A"/>':'<path d="M12 -78l40 -26" stroke="#12235A" stroke-width="10" stroke-linecap="round"/><path d="M12 -78l40 -26" stroke="#3C7A68" stroke-width="6" stroke-linecap="round"/>')+'<path d="M-36 -46v8" stroke="#7FA0C9" stroke-width="3"/><rect x="-46" y="-24" width="22" height="12" rx="2" fill="#8A5630" '+C1+'/><text y="-30" text-anchor="middle" transform="translate(0 -88)" '+FT+' font-size="0">.</text></g>';
+  function predio(x,w,h,cor,tipo){ let s='<rect x="'+x+'" y="'+(CHAO-h)+'" width="'+w+'" height="'+h+'" fill="'+cor+'" '+C+'/>';
+    for(let r=0;r<Math.floor(h/48);r++) for(let c=0;c<Math.floor((w-10)/30);c++){ const wx=x+10+c*30, wy=CHAO-h+14+r*48; if(r===Math.floor(h/48)-1&&c===Math.floor(Math.floor((w-10)/30)/2)) continue; s+='<rect x="'+wx+'" y="'+wy+'" width="18" height="26" fill="#FFE9A8" '+C1+'/><path d="M'+(wx+9)+' '+wy+'v26M'+wx+' '+(wy+13)+'h18" stroke="#12235A" stroke-width="1.2"/>'; }
+    const dx=x+w/2-11; s+='<rect x="'+dx+'" y="'+(CHAO-40)+'" width="22" height="40" fill="#3A2A1E" '+C1+'/><circle cx="'+(dx+17)+'" cy="'+(CHAO-20)+'" r="1.8" fill="#FFC83D"/>';
+    s+='<rect x="'+(x-4)+'" y="'+(CHAO-h-8)+'" width="'+(w+8)+'" height="10" fill="#5E667D" '+C1+'/><rect x="'+(x+w-26)+'" y="'+(CHAO-h-30)+'" width="14" height="24" fill="#8A4A3A" '+C1+'/><path d="M'+(x+w-19)+' '+(CHAO-h-34)+'q-8 -10 2 -18t-2 -18" fill="none" stroke="#C9C3BC" stroke-width="6" stroke-linecap="round" opacity=".7"/>';
+    if(tipo) s+='<rect x="'+(x+w/2-50)+'" y="'+(CHAO-h+2)+'" width="100" height="22" rx="4" fill="#2F5D50" stroke="#fff" stroke-width="2"/><text x="'+(x+w/2)+'" y="'+(CHAO-h+18)+'" text-anchor="middle" '+FT+' font-size="12" fill="#fff">'+tipo+'</text>';
+    return s; }
+  /* testemunhas: x, quem, o que diz, adoeceu?, de onde bebia */
+  const TE=[
+    {x:58,n:'O porteiro da oficina',d:'Aqui na oficina temos um <b>poço próprio</b>. Quase ninguém daqui adoeceu!',doe:0,bebe:'poço próprio',p:()=>G.pessoa(58,CHAO+52,.5,{adulto:1,tipo:'careca',pele:P[1],roupa:'#5E667D',calca:'#2E3B6E',expr:'feliz',bd:'frente'})},
+    {x:150,n:'A senhora de longe',d:'Moro longe daqui, mas gosto tanto da água da Rua Larga que <b>mando buscar um jarro</b> todo dia. Fiquei doente…',doe:1,bebe:'bomba da Rua Larga',p:()=>G.pessoa(150,CHAO+52,.5,{adulto:1,tipo:'coque',pele:P[0],cab:'#9AA3B8',roupa:'#7A4BC2',vestido:1,expr:'triste',bd:'frente',maoD:'<path d="M-8 -12h16l-2 22h-12Z" fill="#C8754A" stroke="#12235A" stroke-width="2"/>'})},
+    {x:240,n:'A lavadeira',d:'Busco água na <b>bomba da Rua Larga</b> todos os dias. Meu filho ficou doente.',doe:1,bebe:'bomba da Rua Larga',p:()=>G.pessoa(240,CHAO+52,.52,{adulto:1,tipo:'rabo',pele:P[3],roupa:'#C8553D',vestido:1,expr:'triste',bd:'baixo',maoD:'<path d="M-12 -2h24l-3 20h-18Z" fill="#9AA3B8" stroke="#12235A" stroke-width="2"/>'})},
+    {x:452,n:'O menino entregador',d:'Bebo água da <b>bomba da Rua Larga</b>, porque é fresquinha. Fiquei com uma dor de barriga terrível!',doe:1,bebe:'bomba da Rua Larga',p:()=>G.pessoa(452,CHAO+52,.5,{tipo:'franja',pele:P[1],roupa:'#2E7BF6',short:'#5E667D',manga:'curta',expr:'triste',bd:'frente',maoD:'<path d="M-7 -8h14l-2 14h-10Z" fill="#E2F4FB" stroke="#12235A" stroke-width="2"/>'})},
+    {x:540,n:'A vendedora de flores',d:'Eu pego água na <b>bomba da outra rua</b>, a Bomba A. Aqui em casa, todo mundo está bem.',doe:0,bebe:'outra bomba',p:()=>G.pessoa(540,CHAO+52,.5,{adulto:1,tipo:'trancas',pele:P[2],roupa:'#FF6B9A',vestido:1,expr:'feliz',bd:'frente',maoD:'<g>'+[[-6,-6,'#FFC83D'],[4,-8,'#E5482B'],[0,2,'#7A4BC2']].map(q=>'<circle cx="'+q[0]+'" cy="'+q[1]+'" r="5" fill="'+q[2]+'" stroke="#12235A" stroke-width="1.4"/>').join('')+'</g>'})},
+    {x:650,n:'O trabalhador da fábrica',d:'Na fábrica de cerveja também temos <b>poço próprio</b>, e nós não bebemos da bomba da rua. Ninguém aqui ficou doente!',doe:0,bebe:'poço próprio',p:()=>G.pessoa(650,CHAO+52,.52,{adulto:1,tipo:'curto',pele:P[4],roupa:'#FF8A3D',calca:'#5E667D',expr:'feliz',bd:'cima'})}];
+  let ouvidos={}, etapa=0, feitos=[], palp=0, tirou=false, cena, ficha, cad;
+  function rua(){ let s='<defs><linearGradient id="jsCeu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#AEB7CC"/><stop offset="1" stop-color="#EDE3CF"/></linearGradient></defs><rect width="'+RW+'" height="'+RH+'" fill="url(#jsCeu)"/>';
+    s+='<g opacity=".45">'+[[40,90],[150,120],[300,80],[420,110],[560,90],[690,120]].map((q,k)=>'<rect x="'+q[0]+'" y="'+q[1]+'" width="'+(70+(k%2)*30)+'" height="'+(240-q[1])+'" fill="#8C8FA6"/><rect x="'+(q[0]+20)+'" y="'+(q[1]-22)+'" width="10" height="24" fill="#8C8FA6"/>').join('')+'</g>';
+    s+='<g fill="#fff" opacity=".55">'+[[90,60,40],[300,40,52],[520,56,46],[660,36,36]].map(q=>'<ellipse cx="'+q[0]+'" cy="'+q[1]+'" rx="'+q[2]+'" ry="'+(q[2]*.35)+'"/>').join('')+'</g>';
+    s+=predio(0,118,170,'#9C8A7A','OFICINA')+predio(118,92,150,'#C77B5A')+predio(210,86,176,'#B5694A')+predio(296,104,140,'#D49A6A')+predio(400,92,160,'#A85F48')+predio(492,80,150,'#C77B5A')+predio(572,148,184,'#8A5A3E','CERVEJARIA');
+    s+='<rect y="'+CHAO+'" width="'+RW+'" height="12" fill="#B9B1A2" '+C1+'/><rect y="'+(CHAO+12)+'" width="'+RW+'" height="'+(RH-CHAO-12)+'" fill="#8C8478"/>';
+    for(let k=0;k<90;k++) s+='<rect x="'+((k*41)%RW)+'" y="'+(CHAO+16+((k*23)%(RH-CHAO-20)))+'" width="16" height="7" rx="2" fill="#A39A8C" opacity=".8"/>';
+    s+='<g transform="translate(360 '+(CHAO+8)+')"><rect x="-58" y="-18" width="116" height="18" rx="3" fill="#2F5D50" stroke="#fff" stroke-width="1.6" transform="translate(0 -150)"/><text y="-155" text-anchor="middle" '+FT+' font-size="11" fill="#fff">RUA LARGA</text></g>';
+    s+=bomba(350,CHAO+14,1.15,false)+'<ellipse cx="318" cy="'+(CHAO+16)+'" rx="18" ry="4" fill="#7FA0C9" opacity=".7"/>';
+    TE.forEach((t,i)=>{ s+=t.p(); if(!ouvidos[i]) s+='<g transform="translate('+t.x+' '+(CHAO-96)+')"><circle r="15" fill="#FFF36B" stroke="#12235A" stroke-width="2.4"/><text y="7" text-anchor="middle" '+FT+' font-size="20" fill="#12235A">?</text></g>'; else s+='<g transform="translate('+t.x+' '+(CHAO-96)+')"><circle r="13" fill="'+(t.doe?'#C93A27':'#24883E')+'" stroke="#fff" stroke-width="2.4"/>'+(t.doe?'<path d="M-6 0h12M0 -6v12" stroke="#fff" stroke-width="3.4" transform="rotate(45)"/>':'<path d="M-6 0l4 5 8 -9" stroke="#fff" stroke-width="3" fill="none"/>')+'</g>'; });
+    s+=snow(392,CHAO+60,.5,false);
+    s+='<g transform="translate(14 14)"><rect width="190" height="26" rx="13" fill="#FFFDF5" stroke="#12235A" stroke-width="1.6"/><text x="95" y="18" text-anchor="middle" '+FT+' font-size="12" fill="#7A4B2A">Londres, verão de 1854</text></g>';
+    return s; }
+  /* ---------- o mapa (etapas 1 a 3) ---------- */
   const CO='ABCDEFGH', LI=6, T=64, X0=56, Y0=56, W=X0+8*T+20, H=Y0+LI*T+30;
-  /* bombas d'água entre as quadras (x,y em coordenadas da grade) */
   const BO=[{n:'A',x:1,y:1},{n:'B',x:4,y:3},{n:'C',x:7,y:1},{n:'D',x:1,y:5},{n:'E',x:7,y:5}];
-  const CERTA=1;
-  /* 12 casas com pessoas doentes, em volta da bomba B (coluna e linha) */
-  const CASOS=[[3,2],[4,2],[3,3],[4,3],[5,3],[3,4],[4,4],[2,3],[5,2],[4,5],[5,4],[2,2]];
-  let feitos=[], palp=0, etapa=1, tirou=false, cena, ficha, ops;
+  const CERTA=1, FAB=[5,2], OFI=[1,3];
+  const CASOS=[[3,2],[4,2],[3,3],[2,3],[4,3],[5,3],[3,4],[4,4]];
   const nome=(c,l)=>CO[c]+(l+1);
-  function desenha(){ let s='<rect width="'+W+'" height="'+H+'" fill="#F3E7CC"/><rect x="4" y="4" width="'+(W-8)+'" height="'+(H-8)+'" rx="10" fill="none" stroke="#B9A285" stroke-width="2" stroke-dasharray="6 4"/>';
+  function mapa(){ let s='<rect width="'+W+'" height="'+H+'" fill="#F3E7CC"/><rect x="4" y="4" width="'+(W-8)+'" height="'+(H-8)+'" rx="10" fill="none" stroke="#B9A285" stroke-width="2" stroke-dasharray="6 4"/>';
     s+='<rect x="'+(X0-10)+'" y="'+(Y0-10)+'" width="'+(8*T+20)+'" height="'+(LI*T+20)+'" rx="14" fill="#BDB4A2" '+C+'/>';
     for(let c=0;c<8;c++) s+='<text x="'+(X0+c*T+T/2)+'" y="'+(Y0-18)+'" text-anchor="middle" '+FT+' font-size="16" fill="#12235A">'+CO[c]+'</text>';
     for(let l=0;l<LI;l++) s+='<text x="'+(X0-26)+'" y="'+(Y0+l*T+T/2+6)+'" text-anchor="middle" '+FT+' font-size="16" fill="#12235A">'+(l+1)+'</text>';
-    /* paralelepípedos das ruas */
     for(let k=0;k<70;k++) s+='<rect x="'+(X0-6+(k*53)%(8*T+8))+'" y="'+(Y0-6+(k*37)%(LI*T+8))+'" width="7" height="4" rx="1.4" fill="#A9A08E" opacity=".7"/>';
     const tij=['#C77B5A','#B5694A','#D49A6A','#A85F48'];
-    for(let c=0;c<8;c++) for(let l=0;l<LI;l++){ const x=X0+c*T, y=Y0+l*T, k=feitos.findIndex(q=>q[0]===c&&q[1]===l), cor=tij[(c*3+l)%4];
+    for(let c=0;c<8;c++) for(let l=0;l<LI;l++){ const x=X0+c*T, y=Y0+l*T, k=feitos.findIndex(q=>q[0]===c&&q[1]===l);
       s+='<rect x="'+(x+5)+'" y="'+(y+5)+'" width="'+(T-10)+'" height="'+(T-10)+'" rx="6" fill="#DCD3C0"/>';
+      if(c===FAB[0]&&l===FAB[1]){ s+='<rect x="'+(x+8)+'" y="'+(y+16)+'" width="'+(T-16)+'" height="'+(T-26)+'" fill="#8A5A3E" stroke="#12235A" stroke-width="1.4"/><rect x="'+(x+T-20)+'" y="'+(y+4)+'" width="8" height="14" fill="#5E667D" stroke="#12235A" stroke-width="1.2"/><text x="'+(x+T/2)+'" y="'+(y+40)+'" text-anchor="middle" '+FT+' font-size="8" fill="#fff">FÁBRICA</text><circle cx="'+(x+T/2)+'" cy="'+(y+T-14)+'" r="4" fill="#4FC3F7" stroke="#12235A" stroke-width="1.2"/>'; continue; }
+      if(c===OFI[0]&&l===OFI[1]){ s+='<rect x="'+(x+8)+'" y="'+(y+14)+'" width="'+(T-16)+'" height="'+(T-24)+'" fill="#9C8A7A" stroke="#12235A" stroke-width="1.4"/><text x="'+(x+T/2)+'" y="'+(y+38)+'" text-anchor="middle" '+FT+' font-size="8" fill="#fff">OFICINA</text><circle cx="'+(x+T/2)+'" cy="'+(y+T-14)+'" r="4" fill="#4FC3F7" stroke="#12235A" stroke-width="1.2"/>'; continue; }
+      const cor=tij[(c*3+l)%4];
       s+='<rect x="'+(x+12)+'" y="'+(y+20)+'" width="'+(T-24)+'" height="'+(T-30)+'" fill="'+cor+'" stroke="#12235A" stroke-width="1.4"/><path d="M'+(x+9)+' '+(y+21)+'L'+(x+T/2)+' '+(y+9)+'L'+(x+T-9)+' '+(y+21)+'Z" fill="#5E667D" stroke="#12235A" stroke-width="1.4"/><rect x="'+(x+T-22)+'" y="'+(y+8)+'" width="6" height="9" fill="#8A5630" stroke="#12235A" stroke-width="1.2"/>';
       s+='<rect x="'+(x+16)+'" y="'+(y+25)+'" width="9" height="8" fill="#FFE9A8" stroke="#12235A" stroke-width="1"/><rect x="'+(x+T-25)+'" y="'+(y+25)+'" width="9" height="8" fill="#FFE9A8" stroke="#12235A" stroke-width="1"/><rect x="'+(x+T/2-4)+'" y="'+(y+T-20)+'" width="8" height="10" fill="#3A2A1E"/>';
-      if(k>=0) s+='<rect x="'+(x+14)+'" y="'+(y+T-15)+'" width="'+(T-28)+'" height="6" rx="2" fill="#12235A"/><rect x="'+(x+14)+'" y="'+(y+T-23)+'" width="'+(T-28)+'" height="6" rx="2" fill="#12235A" opacity=".8"/>'; }
-    /* rosa dos ventos e título */
-    s+='<g transform="translate('+(W-24)+' 30)"><circle r="14" fill="#fff" stroke="#12235A" stroke-width="1.6"/><path d="M0 -12l4 12-4 12-4 -12Z" fill="#C93A27"/><text y="-17" text-anchor="middle" '+FT+' font-size="9" fill="#12235A">N</text></g><text x="'+X0+'" y="18" '+FT+' font-size="12" fill="#7A4B2A">Bairro do Soho, Londres, 1854</text>';
-    /* ruas: nomes */
-    s+='<g transform="translate('+(X0+2*T)+' '+(Y0+3*T)+')"><rect x="-34" y="-9" width="68" height="18" rx="3" fill="#2F5D50" stroke="#fff" stroke-width="1.6"/><text y="4" text-anchor="middle" '+FT+' font-size="11" fill="#fff">Rua Larga</text></g>';
-    BO.forEach((b,i)=>{ const x=X0+b.x*T, y=Y0+b.y*T, sem=tirou&&i===CERTA; s+='<g transform="translate('+x+' '+y+')"><circle r="19" fill="'+(etapa===2?'#FFF36B':'#fff')+'" stroke="#12235A" stroke-width="2.6"/><rect x="-5" y="-12" width="10" height="22" rx="2" fill="#2F5D50" '+C1+'/><circle cy="-13" r="5" fill="#2F5D50" '+C1+'/><rect x="-8" y="8" width="16" height="5" rx="1.4" fill="#2F5D50" '+C1+'/>'+(sem?'':'<path d="M5 -6l11 -7" stroke="#12235A" stroke-width="3.4" stroke-linecap="round"/>')+'<path d="M-5 -2h-7v5" fill="none" stroke="#12235A" stroke-width="2.6"/><path d="M-12 5v4" stroke="#4FC3F7" stroke-width="2"/><rect x="-30" y="21" width="60" height="18" rx="9" fill="#12235A"/><text y="35" text-anchor="middle" '+FT+' font-size="12" fill="#fff">Bomba '+b.n+'</text></g>'; });
+      if(k>=0) s+='<g transform="translate('+(x+T-14)+' '+(y+14)+')"><circle r="11" fill="#C93A27" stroke="#fff" stroke-width="2.4"/><path d="M-5 -5l10 10M5 -5l-10 10" stroke="#fff" stroke-width="3"/></g>'; }
+    if(etapa>=2) s+='<circle cx="'+(X0+4*T)+'" cy="'+(Y0+3*T)+'" r="'+(1.45*T)+'" fill="#C93A27" opacity=".08" stroke="#C93A27" stroke-width="2" stroke-dasharray="8 6"/>';
+    s+='<g transform="translate('+(W-24)+' 30)"><circle r="14" fill="#fff" stroke="#12235A" stroke-width="1.6"/><path d="M0 -12l4 12-4 12-4 -12Z" fill="#C93A27"/><text y="-17" text-anchor="middle" '+FT+' font-size="9" fill="#12235A">N</text></g><text x="'+X0+'" y="18" '+FT+' font-size="12" fill="#7A4B2A">Mapa do doutor Snow · Soho, Londres, 1854</text>';
+    BO.forEach((b,i)=>{ const x=X0+b.x*T, y=Y0+b.y*T, sem=tirou&&i===CERTA; s+='<g transform="translate('+x+' '+y+')"><circle r="19" fill="'+(etapa===2?'#FFF36B':'#fff')+'" stroke="#12235A" stroke-width="2.6"/><rect x="-5" y="-12" width="10" height="22" rx="2" fill="#2F5D50" '+C1+'/><circle cy="-13" r="5" fill="#2F5D50" '+C1+'/><rect x="-8" y="8" width="16" height="5" rx="1.4" fill="#2F5D50" '+C1+'/>'+(sem?'':'<path d="M5 -6l11 -7" stroke="#12235A" stroke-width="3.4" stroke-linecap="round"/>')+'<path d="M-5 -2h-7v5" fill="none" stroke="#12235A" stroke-width="2.6"/><rect x="-30" y="21" width="60" height="18" rx="9" fill="#12235A"/><text y="35" text-anchor="middle" '+FT+' font-size="12" fill="#fff">Bomba '+b.n+'</text></g>'; });
     return s; }
-  function alvos(){ if(etapa===1){ const out=[]; for(let c=0;c<8;c++) for(let l=0;l<LI;l++) out.push({x:X0+c*T+T/2,y:Y0+l*T+T/2,r:T/2-6,rot:'Casa '+nome(c,l)}); return out; }
-    return BO.map(b=>({x:X0+b.x*T,y:Y0+b.y*T,r:22,rot:'Bomba '+b.n,marca:etapa===2})); }
+  function alvosMapa(){ if(etapa===1){ const out=[]; for(let c=0;c<8;c++) for(let l=0;l<LI;l++) out.push({x:X0+c*T+T/2,y:Y0+l*T+T/2,r:T/2-6,rot:'Casa '+nome(c,l)}); return out; }
+    if(etapa===2) return BO.map(b=>({x:X0+b.x*T,y:Y0+b.y*T,r:22,rot:'Bomba '+b.n,marca:1}));
+    return []; }
+  /* ---------- caderno de pistas ---------- */
+  function caderno(){ cad.innerHTML='<p class="js-cad-t">📒 Caderno de pistas do doutor Snow</p><ol class="js-pistas">'+TE.map((t,i)=>ouvidos[i]?'<li class="'+(t.doe?'doe':'bem')+'"><b>'+t.n+'</b><span>'+(t.doe?'adoeceu':'não adoeceu')+'</span><small>bebia: '+t.bebe+'</small></li>':'<li class="vazia"><b>?</b><span>pista '+(i+1)+'</span></li>').join('')+'</ol>'; }
+  function ouvir(i){ if(etapa!==0||ouvidos[i]) { if(etapa===0&&ouvidos[i]) pere('<b>'+TE[i].n+':</b> “'+TE[i].d+'”',TE[i].doe?'ops':'feliz'); return; }
+    ouvidos[i]=1; som(TE[i].doe?'errado':'certo'); cena.render(); caderno(); const n=Object.keys(ouvidos).length;
+    pere('<b>'+TE[i].n+':</b> “'+TE[i].d+'”'+(n<TE.length?' <small>Pistas: '+n+' de 6.</small>':''),TE[i].doe?'ops':'feliz');
+    if(n===TE.length){ ficha.innerHTML='<p class="e11-ficha-t">Todas as testemunhas ouvidas!</p><p class="e11-ficha-p">Quem bebeu da <b>bomba da Rua Larga</b> adoeceu, até a senhora que mora longe. Quem tinha <b>poço próprio</b> ou usava <b>outra bomba</b> ficou bem. Vamos conferir no mapa?</p><div class="acoes"><button type="button" class="btn sol js-mapa">🗺️ Abrir o mapa do bairro</button></div>'; ficha.querySelector('.js-mapa').addEventListener('click',abreMapa);
+      setTimeout(()=>pere('Pistas completas! Repare: <b>todos os doentes</b> bebiam da mesma bomba. Agora vamos marcar no mapa onde moram os doentes.','lupa'),1600); } }
+  function abreMapa(){ etapa=1; som('pop'); montaCena(); mostraFicha(); pere('Este é o mapa do bairro. Marque as <b>8 casas</b> com pessoas doentes. Use as letras de cima e os números do lado.','fala'); }
   function mostraFicha(){ if(etapa!==1) return; const q=CASOS[feitos.length];
-    ficha.innerHTML='<p class="e11-ficha-t">Caderno do doutor Snow · caso '+(feitos.length+1)+' de '+CASOS.length+'</p><p class="e11-ficha-p">Pessoa doente na casa <b class="js-cod">'+nome(q[0],q[1])+'</b>. Encontre a coluna <b>'+CO[q[0]]+'</b> e a linha <b>'+(q[1]+1)+'</b> e toque na casa.</p>'; }
-  function toque(i){ if(etapa===1){ const c=Math.floor(i/LI), l=i%LI, q=CASOS[feitos.length];
+    ficha.innerHTML='<p class="e11-ficha-t">Caso '+(feitos.length+1)+' de '+CASOS.length+' <span class="js-barra"><i style="width:'+(feitos.length/CASOS.length*100)+'%"></i></span></p><p class="e11-ficha-p">Pessoa doente na casa <b class="js-cod">'+nome(q[0],q[1])+'</b>: coluna <b>'+CO[q[0]]+'</b>, linha <b>'+(q[1]+1)+'</b>.</p>'; }
+  function toqueMapa(i){ if(etapa===1){ const c=Math.floor(i/LI), l=i%LI, q=CASOS[feitos.length];
+      if((c===FAB[0]&&l===FAB[1])||(c===OFI[0]&&l===OFI[1])){ som('pop'); pere(c===FAB[0]?'Esta é a <b>fábrica de cerveja</b>: fica pertinho da bomba, mas tem poço próprio. Ninguém adoeceu aqui!':'Esta é a <b>oficina</b>: tem poço próprio, e quase ninguém adoeceu.','lupa'); return; }
       if(c===q[0]&&l===q[1]){ feitos.push(q); som('certo'); cena.render();
-        if(feitos.length===CASOS.length){ etapa=2; cena.render(); ficha.innerHTML='<p class="e11-ficha-t">Todas as 12 casas marcadas!</p><p class="e11-ficha-p">Olhe o mapa: as marcas se juntam em volta de qual <b>bomba d’água</b>? Toque nela. Você tem <b>3 palpites</b> para a estrela.</p>'; pere('Que interessante! As casas com doentes ficam todas <b>juntinhas</b>. O que elas têm em comum? Toque na bomba d’água que você acha que espalha a doença.','lupa'); }
-        else { mostraFicha(); if(feitos.length%4===0) pere('Já são '+feitos.length+' casas marcadas. Está aparecendo um <b>desenho</b> no mapa?','lupa'); } }
-      else { som('errado'); pere('Essa é a casa <b>'+nome(c,l)+'</b>. A casa do caso é a <b>'+nome(q[0],q[1])+'</b>: coluna '+CO[q[0]]+', linha '+(q[1]+1)+'. As letras ficam em cima e os números, do lado.','ops'); } return; }
+        if(feitos.length===CASOS.length){ etapa=2; cena.render(); ficha.innerHTML='<p class="e11-ficha-t">Todas as 8 casas marcadas!</p><p class="e11-ficha-p">As marcas vermelhas se juntam em volta de qual <b>bomba d’água</b>? Toque nela. Você tem <b>3 palpites</b> para a estrela.</p>'; pere('Que desenho apareceu no mapa! As casas com doentes ficam todas <b>juntinhas</b>. E a fábrica e a oficina, bem no meio, não têm doentes. Qual é a bomba culpada?','lupa'); }
+        else mostraFicha(); }
+      else { som('errado'); pere('Essa é a casa <b>'+nome(c,l)+'</b>. Procure a <b>'+nome(q[0],q[1])+'</b>: coluna '+CO[q[0]]+' (em cima) e linha '+(q[1]+1)+' (do lado).','ops'); } return; }
     if(etapa===2){ palp++; if(i===CERTA){ etapa=3; som('certo'); cena.render(); const g=palp<=3; if(g) ganharEstrela('snow');
-        ficha.innerHTML='<p class="e11-ficha-t">A bomba da Rua Larga!</p><p class="e11-ficha-p">Quase todas as casas com doentes ficavam perto dela: as pessoas buscavam água ali. Agora, tire a alavanca.</p><div class="acoes"><button type="button" class="btn sol js-tira">Tirar a alavanca da bomba B</button></div>';
+        ficha.innerHTML='<p class="e11-ficha-t">A bomba da Rua Larga!</p><p class="e11-ficha-p">As pistas e o mapa contam a mesma história. Agora, convença a prefeitura a tirar a alavanca da bomba!</p><div class="acoes"><button type="button" class="btn sol js-tira">🔧 Tirar a alavanca da bomba B</button></div>';
         ficha.querySelector('.js-tira').addEventListener('click',tira);
-        pere(g?'Você achou a bomba com '+palp+(palp===1?' palpite':' palpites')+'! Observar, registrar e comparar: é assim que a ciência descobre de onde vem uma doença. Você ganhou uma estrela ⭐':'Achou, mas com '+palp+' palpites. Para a estrela, use no máximo 3. Toque em <b>Começar de novo</b> e tente outra vez.',g?'feliz':'ops'); }
-      else { som('errado'); pere('A bomba '+BO[i].n+' fica longe da maioria das casas marcadas. Olhe onde as marcas se juntam. <small>Palpites: '+palp+'.</small>','ops'); } } }
-  function tira(){ tirou=true; som('plip'); cena.render(); const sem=[9,14,30,26,12,6,3,2], dep=['1ª','2ª','3ª','4ª','5ª','6ª','7ª','8ª'];
+        pere(g?'Você achou a bomba com '+palp+(palp===1?' palpite':' palpites')+'! Ouvir as pessoas, registrar no mapa e comparar: é assim que a ciência descobre de onde vem uma doença. Você ganhou uma estrela ⭐':'Achou, mas com '+palp+' palpites. Para a estrela, use no máximo 3. Toque em <b>Começar de novo</b> e tente outra vez.',g?'feliz':'ops'); }
+      else { som('errado'); pere('A bomba '+BO[i].n+' fica longe das marcas vermelhas. E lembre das pistas: quem adoeceu bebia de qual bomba? <small>Palpites: '+palp+'.</small>','ops'); } } }
+  function tira(){ tirou=true; som('plip'); etapa=4; palco.querySelector('.e11-cena').remove();
+    const fim=document.createElement('div'); fim.className='e11-cena larga'; fim.innerHTML='<svg viewBox="0 0 '+RW+' '+RH+'" role="img" aria-label="O doutor Snow segura a alavanca tirada da bomba da Rua Larga">'+(()=>{ let s=rua(); s=s.replace(bomba(350,CHAO+14,1.15,false),bomba(350,CHAO+14,1.15,true)); return s+snow(392,CHAO+60,.5,true)+'<g transform="translate(560 70)"><rect x="-120" y="-34" width="240" height="56" rx="14" fill="#FFFDF5" stroke="#12235A" stroke-width="2"/><text y="-10" text-anchor="middle" '+FT+' font-size="14" fill="#12235A">Bomba sem alavanca:</text><text y="12" text-anchor="middle" '+FT+' font-size="14" fill="#C93A27">ninguém pega mais essa água!</text></g>'; })()+'</svg>'; palco.insertBefore(fim,ficha.nextSibling);
+    const sem=[9,14,30,26,12,6,3,2], dep=['1ª','2ª','3ª','4ª','5ª','6ª','7ª','8ª'];
     ficha.innerHTML='<p class="e11-ficha-t">Depois de tirar a alavanca</p><div class="js-graf" aria-label="Gráfico ilustrativo de casos por semana">'+sem.map((v,k)=>'<div><i style="height:'+(v*3)+'px;background:'+(k<4?'#C93A27':'#24883E')+'"></i><small>'+dep[k]+'</small></div>').join('')+'</div><p class="e11-ficha-p" style="margin-top:6px">Gráfico ilustrativo de casos por semana. A alavanca foi tirada no começo da <b>5ª semana</b>.</p>';
-    pere('Sem a alavanca, ninguém mais pegou água naquela bomba, e os casos foram diminuindo. A lição de 1854 vale até hoje: <b>água contaminada espalha doenças</b>, e água tratada protege um bairro inteiro.','feliz'); }
-  function novo(){ feitos=[]; palp=0; etapa=1; tirou=false; palco.innerHTML='';
+    pere('Sem a alavanca, ninguém mais pegou água naquela bomba, e os casos foram diminuindo. Você foi um ótimo <b>detetive da água</b>! A lição de 1854 vale até hoje: <b>água contaminada espalha doenças</b>, e água tratada protege um bairro inteiro.','feliz'); }
+  function montaCena(){ const v=palco.querySelector('.e11-cena'); if(v) v.remove(); const d=palco.querySelector('.e11-dica-rol'); if(d) d.remove(); palco.classList.remove('e11-rol');
+    cena=etapa===0?e11Cena(palco,{W:RW,H:RH,cls:'larga',rot:'Uma rua de Londres em 1854, com a bomba d’água no meio, o doutor Snow e seis moradores para entrevistar',desenha:rua,alvos:()=>TE.map((t,i)=>({x:t.x,y:CHAO-20,r:36,rot:t.n})),toque:ouvir})
+      :e11Cena(palco,{W,H,cls:'larga',rot:'Mapa do bairro com colunas de A a H, linhas de 1 a 6, a fábrica, a oficina e cinco bombas d’água',desenha:mapa,alvos:alvosMapa,toque:toqueMapa}); }
+  function novo(){ ouvidos={}; feitos=[]; palp=0; etapa=0; tirou=false; palco.innerHTML='';
     ficha=document.createElement('div'); ficha.className='e11-quadro js-ficha'; ficha.setAttribute('aria-live','polite'); palco.appendChild(ficha);
-    cena=e11Cena(palco,{W,H,cls:'larga',rot:'Mapa de um bairro dividido em quadras, com colunas de A a H e linhas de 1 a 6, e cinco bombas d’água',desenha,alvos,toque});
-    mostraFicha(); pere('Londres, 1854. Muita gente está doente de <b>cólera</b>. Ajude o doutor Snow: marque no mapa cada casa do caderno.','fala'); }
+    ficha.innerHTML='<p class="e11-ficha-t">Londres, 1854: uma doença misteriosa</p><p class="e11-ficha-p">Muita gente da Rua Larga está com <b>cólera</b>, uma diarreia muito forte. O doutor John Snow desconfia da <b>água</b>. Toque nos <b>6 moradores</b> com <b>?</b> e ouça o que eles contam.</p>';
+    montaCena(); cad=document.createElement('div'); cad.className='js-cad'; palco.appendChild(cad); caderno();
+    pere('Você é assistente do doutor Snow! Primeiro, vamos ouvir os moradores. Toque em cada pessoa com <b>?</b>.','fala'); }
   $('jsNovo').addEventListener('click',novo); novo();
-  window.__jsMarca=()=>{ while(etapa===1){ const q=CASOS[feitos.length]; toque(q[0]*LI+q[1]); } };
+  window.__jsMarca=()=>{ TE.forEach((_,i)=>ouvir(i)); abreMapa(); while(etapa===1){ const q=CASOS[feitos.length]; toqueMapa(q[0]*LI+q[1]); } };
 })();
 
 /* =====================================================================
