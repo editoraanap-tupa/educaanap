@@ -1706,6 +1706,19 @@ body.ver-portal{background:#FFFFFF}
 @media (min-width:740px) and (max-width:1099.98px){#portal div.ea-edicoes{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* ---------- catorze edições: a mais nova em destaque, as outras treze em 4 colunas e o atalho da busca ocupando o resto da última linha ---------- */
 @media (min-width:1100px){#portal .ea-ed.ea-ed-busca{grid-column:span 3}#portal .ea-ed.ea-ed-busca>div{display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:24px;row-gap:2px;align-items:center;align-content:center;height:100%;box-sizing:border-box;padding:20px 30px}#portal .ea-ed.ea-ed-busca>div>*{margin-top:0;margin-bottom:0}#portal .ea-ed.ea-ed-busca svg{grid-row:1/4}#portal .ea-ed.ea-ed-busca .ea-ed-n,#portal .ea-ed.ea-ed-busca h4,#portal .ea-ed.ea-ed-busca .ea-busca-tx{grid-column:2}#portal .ea-ed.ea-ed-busca .ea-acoes{grid-column:3;grid-row:1/4;margin:0}}
+/* ---------- cartão pedagógico no lugar do atalho da busca ---------- */
+#portal .ea-ed.ea-ped>div{display:flex!important;flex-direction:column;align-items:flex-start;gap:12px!important;padding:30px 34px!important;height:auto}
+#portal .ea-ed.ea-ped>div>*{grid-column:auto!important;grid-row:auto!important}
+#portal .ea-ped h4{font-size:clamp(1.3rem,2.4vw,1.7rem);line-height:1.2}
+#portal .ea-ped .ea-busca-tx{max-width:62ch;font-size:1rem}
+#portal .ea-ped-num{list-style:none;margin:6px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;width:100%}
+#portal .ea-ped-num li{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column}
+#portal .ea-ped-num b{font-size:2rem;line-height:1;color:#FFD27A;font-weight:800}
+#portal .ea-ped-num span{color:#DCEBE6;font-size:.88rem;margin-top:4px}
+#portal .ea-ped-rec{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+#portal .ea-ped-rec li{background:#fff;color:#0F5B4A;border-radius:999px;padding:5px 12px;font-size:.85rem;font-weight:700}
+#portal .ea-ped .ea-acoes{margin-top:4px!important}
+@media (max-width:740px){#portal .ea-ped-num{grid-template-columns:repeat(2,minmax(0,1fr))}#portal .ea-ed.ea-ped>div{padding:24px 20px!important}}
 </style>
 </head>
 <body class="ver-portal">
@@ -2083,12 +2096,20 @@ body.ver-portal{background:#FFFFFF}
           <p class="ea-acoes"><a class="ea-pill" href="#capa">Abrir a edição nº 1</a></p>
         </div>
       </article>
-      <article class="ea-ed ea-ed-busca">
+      <article class="ea-ed ea-ed-busca ea-ped">
         <div>
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" aria-hidden="true"><circle cx="21" cy="21" r="13"/><path d="M31 31l11 11"/></svg>
-          <p class="ea-ed-n">235 atividades</p>
-          <h4>Procurando uma atividade?</h4>
-          <p class="ea-busca-tx">Busque por palavra ou escolha um tema, uma edição ou um tipo de jogo.</p>
+          <p class="ea-ed-n">Ferramenta pedagógica para a sala de aula</p>
+          <h4>Ciência de verdade, em linguagem de criança</h4>
+          <p class="ea-busca-tx">Cada edição do Eco Legal nasce de uma pesquisa da universidade e chega à escola como jogos, desafios e atividades fora da tela. A professora encontra a atividade certa pelo tema, pela edição, pelo tipo de jogo ou pelo código da habilidade da BNCC.</p>
+          <ul class="ea-ped-num">
+            <li><b>14</b><span>edições temáticas</span></li>
+            <li><b>235</b><span>atividades interativas</span></li>
+            <li><b>82</b><span>habilidades da BNCC</span></li>
+            <li><b>14</b><span>ODS da Agenda 2030</span></li>
+          </ul>
+          <ul class="ea-ped-rec">
+            <li>🔊 Ouvir os textos</li><li>🤟 Libras</li><li>🖨️ Imprimir e salvar em PDF</li><li>📚 Referências científicas</li><li>🎓 Diploma e estrelas</li><li>📱 Celular, tablet e computador</li>
+          </ul>
           <p class="ea-acoes"><a class="ea-pill" href="#p-busca">Encontrar uma atividade</a></p>
         </div>
       </article>
