@@ -5742,7 +5742,54 @@ const P17=(function(){
     else if(t==='canto') s+='<path d="M'+m(0,0)+'h'+n(z*.6)+'a'+n(z*.6)+' '+n(z*.6)+' 0 0 1 '+n(-z*.6)+' '+n(z*.6)+'Z" fill="'+c+'"/>';
     return s; };
   /* boi do bumba meu boi (x,y = chão) */
-  const boi=(x,y,s)=>tr(x,y,s)+'<path d="M-40 -10q-4 -40 40 -42q44 2 40 42Z" fill="#12235A" '+C+'/>'+['#FF6B9A','#FFC83D','#4FC3F7','#5CC979','#FF8A3D','#9B6BE0'].map((c,k)=>'<path d="M'+(-38+k*13)+' -12l6 14 6 -14Z" fill="'+c+'" '+C1+'/>').join('')+'<g fill="#FFC83D">'+[[-20,-34],[0,-40],[20,-34],[-8,-24],[12,-24]].map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3"/>').join('')+'</g><path d="M36 -36q14 -6 22 4q2 12 -10 14q-12 -2 -12 -18Z" fill="#fff" '+C+'/><path d="M44 -40q-6 -12 2 -18M54 -36q6 -12 14 -10" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none"/><path d="M44 -40q-6 -12 2 -18M54 -36q6 -12 14 -10" stroke="'+L+'" stroke-width="1.4" fill="none"/><circle cx="50" cy="-28" r="1.8" fill="'+L+'"/><path d="M-36 -24q-14 4 -12 18" stroke="#fff" stroke-width="3" fill="none"/></g>';
+  // returns inner svg of boi (unit coords, ground y=0, facing right)
+  const boiArte=(function(){
+    const fit=['#FF6B9A','#FFC83D','#4FC3F7','#5CC979','#FF8A3D','#9B6BE0'];
+    let s='';
+    // sombra
+    s+='<ellipse cx="4" cy="1" rx="58" ry="5" fill="#12235A" opacity=".14"/>';
+    // rabo
+    s+='<path d="M-56 -84q-18 6 -16 34" stroke="'+L+'" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M-56 -84q-18 6 -16 34" stroke="#3A2A6E" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M-72 -52q-6 8 0 16q6 -6 4 -16Z" fill="#FFC83D" '+C1+'/>';
+    // pernas do brincante (miolo)
+    s+='<path d="M-10 -32v28M10 -32v28" stroke="'+L+'" stroke-width="9" stroke-linecap="round"/><path d="M-10 -32v28M10 -32v28" stroke="#fff" stroke-width="6" stroke-linecap="round"/>';
+    s+='<path d="M-17 0q0 -6 8 -6q5 0 5 6Z" fill="#5E3A26" '+C1+'/><path d="M17 0q0 -6 -8 -6q-5 0 -5 6Z" fill="#5E3A26" '+C1+'/>';
+    // franja de fitas da saia
+    s+='<g '+C1+'>'+Array.from({length:12},(_,k)=>{const x=-52+k*9.2;return '<path d="M'+x+' -40l4 18 4 -18Z" fill="'+fit[k%6]+'"/>';}).join('')+'</g>';
+    // saia de chita
+    s+='<path d="M-56 -60h112l-2 22q-9 6 -18 0q-9 6 -18 0q-9 6 -18 0q-9 6 -18 0q-9 6 -18 0q-9 6 -18 0Z" fill="#E5482B" '+C+'/>';
+    s+='<g fill="#FFC83D">'+[-44,-26,-8,10,28,46].map(x=>'<circle cx="'+x+'" cy="-50" r="2.6"/>').join('')+'</g><g fill="#fff" opacity=".9">'+[-35,-17,1,19,37].map(x=>'<circle cx="'+x+'" cy="-45" r="1.8"/>').join('')+'</g>';
+    // corpo bordado (veludo)
+    s+='<path d="M-60 -58q-2 -44 60 -46q62 2 60 46Z" fill="#1E2A78" '+C+'/>';
+    s+='<path d="M-50 -66q4 -28 50 -30q46 2 50 30" stroke="#FFC83D" stroke-width="2.4" fill="none" stroke-dasharray="1 4" stroke-linecap="round"/>';
+    s+='<path d="M-60 -60h120" stroke="#FFC83D" stroke-width="3.4"/>';
+    // estrela bordada no meio + flores
+    const est=(cx,cy,r,c)=>{let p='';for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2?r*.45:r;p+=(i?'L':'M')+(cx+rr*Math.cos(a)).toFixed(1)+' '+(cy+rr*Math.sin(a)).toFixed(1);}return '<path d="'+p+'Z" fill="'+c+'" stroke="'+L+'" stroke-width="1.2" stroke-linejoin="round"/>';};
+    s+=est(0,-80,13,'#FFC83D');
+    const flor=(cx,cy,c)=>'<g>'+[0,72,144,216,288].map(a=>'<circle cx="'+(cx+5*Math.cos(a*Math.PI/180)).toFixed(1)+'" cy="'+(cy+5*Math.sin(a*Math.PI/180)).toFixed(1)+'" r="3.6" fill="'+c+'"/>').join('')+'<circle cx="'+cx+'" cy="'+cy+'" r="2.6" fill="#FFC83D"/></g>';
+    s+=flor(-32,-74,'#FF6B9A')+flor(32,-74,'#4FC3F7')+flor(-16,-92,'#5CC979')+flor(18,-93,'#FF8A3D');
+    // paetês
+    s+='<g>'+[[-46,-66,'#fff'],[-22,-64,'#4FC3F7'],[22,-64,'#FF6B9A'],[46,-66,'#fff'],[-4,-98,'#fff'],[-40,-84,'#FFC83D'],[42,-84,'#FFC83D'],[0,-64,'#5CC979']].map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="1.8" fill="'+p[2]+'"/>').join('')+'</g>';
+    // brilho do veludo
+    s+='<path d="M-40 -92q14 -8 30 -9" stroke="#fff" stroke-width="2.4" fill="none" opacity=".35" stroke-linecap="round"/>';
+    // pescoço
+    s+='<path d="M44 -98q16 -10 26 -4l4 36q-14 6 -30 -2Z" fill="#1E2A78" '+C+'/>';
+    // chifres
+    s+='<path d="M61 -109Q40 -114 43 -140Q52 -124 69 -117Z" fill="#EFD9A6" '+C+'/><path d="M87 -109Q108 -114 105 -140Q96 -124 79 -117Z" fill="#EFD9A6" '+C+'/><path d="M47 -128q3 6 10 9M101 -128q-3 6 -10 9" stroke="#D9C49A" stroke-width="1.6" fill="none"/>';
+    // fitas dos chifres
+    s+='<g stroke-linecap="round" fill="none" stroke-width="2.6">'+[['#FF6B9A','M58 -116q-8 14 -4 30'],['#4FC3F7','M60 -115q2 16 -6 32'],['#FFC83D','M90 -116q8 14 4 30'],['#5CC979','M88 -115q-2 16 6 32']].map(f=>'<path d="'+f[1]+'" stroke="'+f[0]+'"/>').join('')+'</g>';
+    // orelhas
+    s+='<path d="M60 -112q-14 -2 -18 8q10 4 18 0Z" fill="#fff" '+C+'/><path d="M88 -112q14 -2 18 8q-10 4 -18 0Z" fill="#fff" '+C+'/>';
+    // cabeça
+    s+='<path d="M60 -116q14 -8 28 0q4 16 0 34q-2 12 -14 12q-12 0 -14 -12q-4 -18 0 -34Z" fill="#fff" '+C+'/>';
+    // focinho
+    s+='<path d="M63 -84q11 -6 22 0q2 14 -11 16q-13 -2 -11 -16Z" fill="#F7B6C2" '+C1+'/><circle cx="69.5" cy="-79" r="1.8" fill="'+L+'"/><circle cx="78.5" cy="-79" r="1.8" fill="'+L+'"/><path d="M70 -73q4 3 8 0" stroke="'+L+'" stroke-width="1.4" fill="none" stroke-linecap="round"/>';
+    // olhos
+    s+='<circle cx="67" cy="-97" r="3" fill="'+L+'"/><circle cx="81" cy="-97" r="3" fill="'+L+'"/><circle cx="68" cy="-98" r="1" fill="#fff"/><circle cx="82" cy="-98" r="1" fill="#fff"/><path d="M63 -102l-2 -2M85 -102l2 -2" stroke="'+L+'" stroke-width="1.2" stroke-linecap="round"/>';
+    // estrela na testa
+    s+=est(74,-108,4.6,'#FFC83D');
+    return s;
+  })();
+  const boi=(x,y,s)=>tr(x,y,s)+boiArte+'</g>';
   /* sombrinha de frevo (na mão) */
   const sombrinha='<g transform="translate(0 -6)"><path d="M0 0v-30" stroke="'+L+'" stroke-width="2"/><path d="M-18 -26a18 12 0 0 1 36 0Z" fill="#FFC83D" '+C1+'/><path d="M-18 -26a18 12 0 0 1 12 -10L0 -26Z" fill="#E5482B"/><path d="M6 -36a18 12 0 0 1 12 10H0Z" fill="#2E7BF6"/><path d="M-6 -36q6 -2 12 0L0 -26Z" fill="#22A565"/></g>';
   const berimbau='<g transform="translate(0 4) rotate(-10)"><path d="M0 18q-6 -30 0 -60" stroke="#8A5630" stroke-width="2.6" fill="none"/><path d="M0 18L1 -42" stroke="'+L+'" stroke-width=".9"/><circle cx="4" cy="10" r="6.4" fill="#E0A84A" '+C1+'/></g>';
@@ -5832,7 +5879,7 @@ function e17Fig(palco,o){ const pere=o.pere; let i=0, ok=0; const R=o.embaralha=
   const capo=pe(20,62,.22,{adulto:1,tipo:'black',pele:PE[4],roupa:'#fff',calca:'#fff',bd:'cima',be:'cima'})+pe(44,62,.2,{tipo:'curto',pele:PE[1],roupa:'#fff',calca:'#fff',bd:'frente',be:'cima',vira:1});
   const CX=[{id:'construcao',rot:'Construção',cor:'#C8553D',ic:ic('#FFE9DD',T.igreja(32,60,.3))},
     {id:'natureza',rot:'Natureza e paisagem',cor:'#24883E',ic:ic('#E4F7EA',T.arvore(32,62,.36))},
-    {id:'saber',rot:'Festa, comida e saber',cor:'#7A2BB8',ic:ic('#F1E6FF',T.boi(28,54,.42))}];
+    {id:'saber',rot:'Festa, comida e saber',cor:'#7A2BB8',ic:ic('#F1E6FF',T.boi(27,58,.32))}];
   const DICA={construcao:'foi construído pelas pessoas, com tijolo, pedra, madeira ou ferro.',natureza:'veio da natureza e faz parte da paisagem.',saber:'vive nas pessoas: a gente aprende, canta, dança ou cozinha.'};
   const c=(t,d,r,exp,bg)=>({t,ic:ic(bg,d),r,exp,dica:DICA[r]});
   const CARTAS=[
@@ -5845,7 +5892,7 @@ function e17Fig(palco,o){ const pere=o.pere; let i=0, ok=0; const R=o.embaralha=
     c('Árvore centenária',T.arvore(32,62,.36,{flor:'#FFC83D'}),'natureza','A <b>árvore centenária</b> é patrimônio natural da praça.','#E4F7EA'),
     c('Cachoeira',cachoeira,'natureza','A <b>cachoeira</b> é um tesouro da natureza e da paisagem.','#E4F7EA'),
     c('Roda de capoeira',capo,'saber','A <b>capoeira</b> é um saber que passa de mestre para aluno. É patrimônio imaterial!','#F1E6FF'),
-    c('Bumba meu boi',T.boi(28,54,.42),'saber','O <b>bumba meu boi</b> é uma festa com dança, música e teatro. É patrimônio imaterial!','#F1E6FF'),
+    c('Bumba meu boi',T.boi(27,58,.32),'saber','O <b>bumba meu boi</b> é uma festa com dança, música e teatro. É patrimônio imaterial!','#F1E6FF'),
     c('Acarajé da baiana',T.tabuleiro(32,58,.8)+'<circle cx="18" cy="16" r="6" fill="#E5482B" opacity=".5"/>','saber','O <b>ofício das baianas de acarajé</b> é um saber registrado como patrimônio do Brasil.','#F1E6FF'),
     c('Viola de cocho','<g transform="translate(32 54) scale(1.3)">'+T.viola+'</g>','saber','O <b>modo de fazer a viola de cocho</b>, de Mato Grosso e Mato Grosso do Sul, é patrimônio do Brasil.','#F1E6FF')];
   const novo=()=>e11Separa(palco,{pere,cartas:CARTAS,caixas:CX,erros:3,estrela:'tipos',dica:c=>'Pense: isso '+c.dica,
@@ -6225,7 +6272,7 @@ const Q17=(function(){
     s+='<rect y="'+B+'" width="'+W+'" height="'+(H0-B)+'" fill="#E8DCC4"/>'+J7.calcada(B,W,10)+'<path d="M0 '+(B+70)+'q380 -24 760 0" stroke="#D9CBB0" stroke-width="2" fill="none"/>';
     s+=pe(70,B+96,.42,{tipo:'trancas',pele:PE[4],roupa:'#FFC83D',short:'#E5482B',bd:'cima',maoD:T.sombrinha,expr:'feliz'})+pe(122,B+96,.4,{adulto:1,tipo:'black',pele:PE[3],roupa:'#2E7BF6',short:'#FFC83D',bd:'cima',be:'cima',maoE:T.sombrinha,vira:1});
     s+=pe(200,B+100,.42,{adulto:1,tipo:'careca',pele:PE[4],roupa:'#fff',calca:'#fff',bd:'frente',maoD:T.berimbau})+pe(244,B+104,.4,{tipo:'curto',pele:PE[1],roupa:'#fff',calca:'#fff',bd:'cima',be:'cima'})+pe(284,B+100,.38,{tipo:'rabo',pele:PE[2],roupa:'#fff',calca:'#fff',bd:'frente',be:'cima',vira:1});
-    s+=pe(336,B+96,.34,{tipo:'franja',pele:PE[0],roupa:'#7A4BC2',short:'#FFC83D',bd:'cima',chapeu:'#E5482B'})+pe(462,B+96,.36,{adulto:1,tipo:'cacheado',pele:PE[3],roupa:'#E5482B',calca:'#2B3F93',bd:'cima',vira:1})+T.boi(392,B+104,1.45);
+    s+=pe(336,B+96,.34,{tipo:'franja',pele:PE[0],roupa:'#7A4BC2',short:'#FFC83D',bd:'cima',chapeu:'#E5482B'})+pe(478,B+96,.36,{adulto:1,tipo:'cacheado',pele:PE[3],roupa:'#E5482B',calca:'#2B3F93',bd:'cima',vira:1})+T.boi(393,B+104,.6);
     s+=M.idoso(530,B+100,.44,{pele:PE[2],roupa:'#FF8A3D',chapeu:'#E8D2A0',bd:'frente',maoD:T.viola,expr:'feliz'})+pe(576,B+100,.38,{adulto:1,tipo:'coque',pele:PE[1],vestido:'#FF6B9A',bd:'cima',be:'cima',vira:1});
     s+=pe(690,B+100,.46,{adulto:1,tipo:'coque',pele:PE[4],vestido:'#fff',bd:'frente',chapeu:'#fff',expr:'feliz',vira:1})+pe(598,B+104,.34,{tipo:'black',pele:PE[3],roupa:'#22A565',short:'#2B3F93',bd:'frente'})+T.tabuleiro(648,B+106,1.3);
     [[330,'trancas',PE[2],'#FFC83D'],[366,'curto',PE[0],'#22A565'],[402,'marias',PE[4],'#FF6B9A'],[438,'cacheado',PE[1],'#2E7BF6']].forEach((q,i)=>{ s+=pe(q[0],H0-4,.34,{tipo:q[1],pele:q[2],roupa:q[3],short:'#7A4BC2',bd:'cima',be:'cima',vira:i%2}); });
@@ -6274,6 +6321,26 @@ const Q17=(function(){
   const W=320, YC=150;
   const fora=(o)=>{ o=o||{}; return J.ceu(W,170,o.c1,o.c2)+(o.sol===false?'':P.sol(296,24,12))+A.nuvem(70,22,1)+'<rect y="'+(YC-4)+'" width="'+W+'" height="'+(170-YC+4)+'" fill="'+(o.chao||'#E8DCC4')+'"/>'; };
   const serra=(c)=>'<path d="M-10 '+(YC-4)+'L70 50L130 100L190 40L270 96L330 '+(YC-4)+'Z" fill="'+(c||'#7FBF7A')+'" '+C1+'/>';
+  /* rio sujo: margem, esgoto saindo do cano, lixo boiando e peixe triste */
+  const rioSujo=()=>{ let r=''; const C='stroke="#12235A" stroke-width="2.2" stroke-linejoin="round"', L='#12235A';
+    r+='<path d="M0 98q80 -6 160 -2t160 0v14H0Z" fill="#A5B48A" '+C1+'/>';
+    r+='<g '+C1+'><rect x="214" y="58" width="62" height="40" fill="#D9CDB8"/><path d="M208 60l37 -20 37 20Z" fill="#B9793A"/><rect x="226" y="70" width="14" height="12" fill="#9FB4C8"/><rect x="252" y="70" width="14" height="28" fill="#8A6A4A"/></g>';
+    r+='<g stroke="#7A8A5A" stroke-width="1.6" stroke-linecap="round">'+[20,26,140,146,300,306].map(x=>'<path d="M'+x+' 104l-2 -10M'+(x+3)+' 104l2 -9"/>').join('')+'</g>';
+    r+='<path d="M0 108q40 -4 80 0t80 0 80 0 80 0V170H0Z" fill="#7E7248"/>';
+    r+='<g fill="none" stroke-linecap="round"><path d="M150 122q20 -4 40 0M60 136q24 -4 48 0M200 146q22 -4 44 0M120 158q26 -4 52 0" stroke="#5E5434" stroke-width="2.2"/><path d="M230 126q14 -3 28 0" stroke="#9A8E60" stroke-width="2"/></g>';
+    r+='<ellipse cx="160" cy="138" rx="16" ry="4" fill="#B88BD6" opacity=".45"/><ellipse cx="164" cy="138" rx="9" ry="2.2" fill="#7FD0C0" opacity=".5"/>';
+    r+='<rect x="268" y="96" width="34" height="11" rx="2" fill="#8A93A6" '+C+'/><rect x="296" y="93" width="10" height="17" rx="2" fill="#6E7891" '+C+'/>';
+    r+='<path d="M268 99q-10 4 -12 18q-1 10 -8 16" stroke="#5B4A28" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M268 99q-10 4 -12 18q-1 10 -8 16" stroke="#7A6232" stroke-width="3" fill="none" stroke-linecap="round"/>';
+    r+='<g fill="#F2EEDC" '+C1+'><circle cx="246" cy="136" r="4"/><circle cx="254" cy="138" r="3"/><circle cx="240" cy="139" r="2.6"/></g>';
+    r+='<path d="M208 112q-8 4 -8 12l6 2q4 -8 10 -10Z" fill="#fff" opacity=".85" '+C1+'/>';
+    r+=P.garrafa(190,124,.42)+P.garrafa(302,152,.38,'#C8F0C8');
+    r+='<g transform="translate(264 162) rotate(-20)"><rect x="-6" y="-14" width="12" height="16" rx="2" fill="#E5482B" '+C1+'/><path d="M-6 -9h12" stroke="#fff" stroke-width="2"/></g>';
+    r+='<ellipse cx="180" cy="158" rx="13" ry="5" fill="none" stroke="#2B2F3A" stroke-width="5"/>';
+    r+='<g transform="translate(224 148)"><path d="M-10 0q10 -9 20 0q-10 9 -20 0Z" fill="#A7B2C2" '+C1+'/><path d="M10 0l7 -5v10Z" fill="#A7B2C2" '+C1+'/><circle cx="-5" cy="-1" r="1.4" fill="'+L+'"/><path d="M-8 3q2 -1.5 4 0" stroke="'+L+'" stroke-width="1" fill="none"/></g>';
+    r+='<g fill="#3A3F55">'+[[116,108],[122,104],[176,112]].map(p=>'<circle cx="'+p[0]+'" cy="'+p[1]+'" r="1.3"/>').join('')+'</g>';
+    r+='<path d="M0 124q70 -8 132 2q8 2 12 8l16 36H0Z" fill="#C9A877" '+C1+'/><path d="M0 128q70 -8 134 2" stroke="#9FB46E" stroke-width="5" fill="none" stroke-linecap="round"/><g fill="#B08F5E"><circle cx="30" cy="150" r="2"/><circle cx="120" cy="156" r="2.4"/><circle cx="70" cy="162" r="1.8"/></g>';
+    r+='<g transform="translate(150 96) rotate(14)"><path d="M-9 0q-4 -14 6 -16h6q10 2 6 16q-9 4 -18 0Z" fill="#2B2F3A" '+C1+'/><path d="M-3 -16l-3 -6M3 -16l3 -6" stroke="#2B2F3A" stroke-width="2.4" stroke-linecap="round"/><path d="M-4 -8q2 4 6 2" stroke="#5A6070" stroke-width="1.4" fill="none"/></g><path d="M118 72q24 -12 30 10" stroke="'+L+'" stroke-width="1.4" stroke-dasharray="2 3" fill="none"/><path d="M140 120q4 -6 8 0M156 120q4 -6 8 0" stroke="#fff" stroke-width="1.6" fill="none"/><path d="M96 80q12 -6 18 4" stroke="'+L+'" stroke-width="1.4" stroke-dasharray="2 3" fill="none"/>';
+    return r; };
   const rioP=(sujo)=>'<path d="M0 '+(YC+2)+'q80 -12 160 0t160 0v24H0Z" fill="'+(sujo?'#8A7A52':'#4FA8E0')+'"/>'+(sujo?P.garrafa(80,YC+10,.5)+P.garrafa(220,YC+12,.45,'#C8F0C8')+'<path d="M300 '+(YC-30)+'v26" stroke="#5E667D" stroke-width="8"/><path d="M300 '+(YC-4)+'q-4 8 -12 10" stroke="#6E5A30" stroke-width="5" fill="none"/>':'<path d="M40 '+(YC+10)+'q10 -4 20 0M200 '+(YC+12)+'q10 -4 20 0" stroke="#fff" stroke-width="2" fill="none"/>');
   const F=[
     {t:'Restaurar o casarão antigo e abrir para visitas.',v:1,exp:'Restaurar e abrir para o povo é <b>proteger o patrimônio cultural</b>, como pede a meta 11.4.',
@@ -6287,11 +6354,11 @@ const Q17=(function(){
     {t:'Proteger o rio e o morro da paisagem.',v:1,exp:'O <b>patrimônio natural</b> também faz parte da meta 11.4: rio limpo e morro verde!',
      il:()=>fora({sol:false})+P.sol(250,30,12)+serra()+rioP(false)+T.arvore(40,YC,.34)+pe(280,YC+10,.42,{tipo:'marias',pele:PE[3],roupa:'#FF6B9A',short:'#2B3F93',bd:'cima',vira:1})},
     {t:'Fazer a festa tradicional na praça.',v:1,exp:'Quando a festa acontece, o <b>patrimônio imaterial</b> continua vivo.',
-     il:()=>fora()+D14.bandeiras(0,320,30)+T.boi(140,YC+4,1)+pe(60,YC+10,.42,{tipo:'trancas',pele:PE[4],roupa:'#FFC83D',short:'#E5482B',bd:'cima',maoD:T.sombrinha})+pe(240,YC+10,.48,{adulto:1,tipo:'careca',pele:PE[2],roupa:'#fff',calca:'#fff',bd:'frente',maoD:T.berimbau,vira:1})},
+     il:()=>fora()+D14.bandeiras(0,320,30)+T.boi(134,YC+6,.7)+pe(60,YC+10,.42,{tipo:'trancas',pele:PE[4],roupa:'#FFC83D',short:'#E5482B',bd:'cima',maoD:T.sombrinha})+pe(240,YC+10,.48,{adulto:1,tipo:'careca',pele:PE[2],roupa:'#fff',calca:'#fff',bd:'frente',maoD:T.berimbau,vira:1})},
     {t:'Derrubar um prédio histórico sem conversar com ninguém.',v:0,exp:'Um prédio histórico derrubado <b>não volta mais</b>. Antes de decidir, é preciso estudar e ouvir a população.',
      il:()=>fora({c1:'#C9CED8',c2:'#EEF0F4'})+'<path d="M40 '+(YC-4)+'l10 -60 20 10 14 -30 20 20 16 -10 10 70Z" fill="#D9B48A" stroke="#12235A" stroke-width="2"/><g fill="#C9A577" stroke="#12235A" stroke-width="1.4"><rect x="60" y="'+(YC-14)+'" width="14" height="10"/><rect x="100" y="'+(YC-12)+'" width="12" height="8"/></g><path d="M200 '+(YC-4)+'V40h70" stroke="#FFC83D" stroke-width="6" fill="none"/><path d="M270 40v30" stroke="#5E667D" stroke-width="2"/><circle cx="270" cy="80" r="12" fill="#5E667D" stroke="#12235A" stroke-width="2"/>'+pe(170,YC+10,.42,{tipo:'cacheado',pele:PE[1],roupa:'#2E7BF6',short:'#FFC83D',bd:'cima',expr:'ops'})},
     {t:'Jogar lixo e esgoto no rio.',v:0,exp:'O rio sujo deixa a paisagem triste e faz mal aos peixes e às pessoas.',
-     il:()=>fora({c1:'#C9CED8',c2:'#EEF0F4',sol:false})+serra('#9AAF8A')+rioP(true)+pe(40,YC+10,.42,{tipo:'franja',pele:PE[0],roupa:'#E5482B',short:'#2B3F93',bd:'frente',expr:'ops'})},
+     il:()=>fora({c1:'#C9CED8',c2:'#EEF0F4',sol:false})+serra('#9AAF8A')+rioSujo()+pe(28,YC+6,.4,{tipo:'franja',pele:PE[0],roupa:'#E5482B',short:'#2B3F93',bd:'frente',expr:'ops'})+pe(96,YC+4,.46,{adulto:1,tipo:'curto',pele:PE[2],roupa:'#7A8296',calca:'#42507F',bd:'cima',vira:1})},
     {t:'Pichar os monumentos da praça.',v:0,exp:'<b>Pichar</b> monumentos estraga o patrimônio de todo mundo e é crime.',
      il:()=>fora()+T.estatua(110,YC,1.2,{picha:1})+T.coreto(230,YC,.6,{picha:1})},
     {t:'Construir um prédio gigante que tapa a vista do morro.',v:0,exp:'A <b>paisagem</b> também é patrimônio. Tapar a vista do morro tira a cara da cidade.',
@@ -6393,7 +6460,7 @@ const Q17=(function(){
       +pe(500,196,.42,{tipo:'marias',pele:PE[2],roupa:'#FF6B9A',short:'#7A4BC2',bd:'cima'})+M.cadeirante(620,198,.4,{adulto:1,pele:PE[3],tipo:'liso',cab:'#5A3A22',roupa:'#2E7BF6',expr:'feliz',vira:1})+tito(680,196,62,'arv-fala'),
     /* 5: patrimônio de todo mundo */
     5:()=>ceuF('#FFD9A8','#FFF4DE',5)+P.sol(620,38,18)+T.casarao(0,176,130,96,{cor:'#FFD9A0',azulejo:true,cols:2})+T.igreja(220,176,.6)+T.casarao(560,176,160,100,{cor:'#BFE3D0',cols:3,sacadas:1})+D14.bandeiras(0,360,60)+D14.bandeiras(360,720,66)+chao('#E8DCC4','#D9CBB0')
-      +T.boi(380,194,1)+pe(300,196,.42,{tipo:'trancas',pele:PE[4],roupa:'#FFC83D',short:'#E5482B',bd:'cima',maoD:T.sombrinha})+pe(470,196,.46,{adulto:1,tipo:'careca',pele:PE[2],roupa:'#fff',calca:'#fff',bd:'frente',maoD:T.berimbau,vira:1})+M.idoso(540,196,.44,{pele:PE[1],roupa:'#FF8A3D',bd:'frente',maoD:T.viola})+pe(160,196,.38,{tipo:'curto',pele:PE[0],roupa:'#22A565',short:'#2B3F93',bd:'cima',be:'cima'})+tito(50,196,64,'arv-capelo')};
+      +T.boi(372,194,.68)+pe(300,196,.42,{tipo:'trancas',pele:PE[4],roupa:'#FFC83D',short:'#E5482B',bd:'cima',maoD:T.sombrinha})+pe(470,196,.46,{adulto:1,tipo:'careca',pele:PE[2],roupa:'#fff',calca:'#fff',bd:'frente',maoD:T.berimbau,vira:1})+M.idoso(540,196,.44,{pele:PE[1],roupa:'#FF8A3D',bd:'frente',maoD:T.viola})+pe(160,196,.38,{tipo:'curto',pele:PE[0],roupa:'#22A565',short:'#2B3F93',bd:'cima',be:'cima'})+tito(50,196,64,'arv-capelo')};
   document.querySelectorAll('svg.e11-arte').forEach(sv=>{ const f=ARTE[sv.dataset.arte]; if(f) sv.innerHTML=f(); });
 })();
 
