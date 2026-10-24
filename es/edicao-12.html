@@ -3361,7 +3361,7 @@ p.e9pj-seg{margin:14px 0 0;max-width:none}
 <link rel="alternate" hreflang="pt-BR" href="https://educaanap.org.br/edicao-12.html">
 <link rel="alternate" hreflang="en-US" href="https://educaanap.org.br/en/edicao-12.html">
 <link rel="alternate" hreflang="es-ES" href="https://educaanap.org.br/es/edicao-12.html">
-<script>(function(){try{var s=localStorage.getItem("ecoLegalIdioma"),h={"pt":"../edicao-12.html","en":"../en/edicao-12.html"};if(s&&h[s])location.replace(h[s]+location.hash);}catch(e){}})();</script>
+<script>(function(){try{localStorage.removeItem("ecoLegalIdioma")}catch(e){}try{var s=sessionStorage.getItem("ecoLegalIdioma"),h={"pt":"../edicao-12.html","en":"../en/edicao-12.html"};if(s&&h[s])location.replace(h[s]+location.hash);}catch(e){}})();</script>
 <style id="idiomas-css">
 .idiomas{display:flex;align-items:center;gap:2px;margin-left:auto;background:var(--papel2,#E9F1FF);border-radius:999px;padding:3px;flex:none;box-shadow:0 3px 0 var(--linha,#C3D3F0)}
 .topo .idiomas a,.idiomas a{font:800 13px/1 'Baloo 2',system-ui,sans-serif!important;color:var(--tinta,#12235A)!important;text-decoration:none!important;padding:8px 8px!important;border-radius:999px;min-height:0!important;min-width:0!important;display:block!important;letter-spacing:.02em;background:none;box-shadow:none}
@@ -3372,7 +3372,7 @@ p.e9pj-seg{margin:14px 0 0;max-width:none}
 @media(max-width:560px){.topo .logo:has(+ .idiomas),.topo .logo:has(~ .idiomas){font-size:0!important;flex:none!important}.topo .logo svg{flex:none}}
 @media print{.idiomas{display:none!important}}
 </style>
-<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.idiomas a[href]');if(!a)return;try{localStorage.setItem('ecoLegalIdioma',a.getAttribute('data-l'))}catch(_){}if(location.hash){a.href=a.getAttribute('href').split('#')[0]+location.hash;}},true);</script>
+<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.idiomas a[href]');if(!a)return;try{sessionStorage.setItem('ecoLegalIdioma',a.getAttribute('data-l'))}catch(_){}if(location.hash){a.href=a.getAttribute('href').split('#')[0]+location.hash;}},true);</script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs></defs><defs>
@@ -3527,7 +3527,7 @@ p.e9pj-seg{margin:14px 0 0;max-width:none}
 <header class="topo">
   <a class="volta" href="index.html" aria-label="Volver al portal EducaANAP"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
   <a class="logo" href="#capa"><svg viewBox="0 0 160 196" aria-hidden="true"><use href="#arv"/></svg>Eco Legal Interactivo</a>
-  <nav class="idiomas" aria-label="Idioma"><a href="../edicao-12.html" hreflang="pt-BR" lang="pt-BR" data-l="pt" title="Português">PT</a><a href="../en/edicao-12.html" hreflang="en-US" lang="en-US" data-l="en" title="English">EN</a><a href="edicao-12.html" hreflang="es-ES" lang="es-ES" data-l="es" title="Español" aria-current="page">ES</a></nav>
+  <nav class="idiomas notranslate" translate="no" aria-label="Idioma"><a href="../edicao-12.html" hreflang="pt-BR" lang="pt-BR" data-l="pt" title="Português">PT</a><a href="../en/edicao-12.html" hreflang="en-US" lang="en-US" data-l="en" title="English">EN</a><a href="edicao-12.html" hreflang="es-ES" lang="es-ES" data-l="es" title="Español" aria-current="page">ES</a></nav>
   <button class="som" id="somBtn" type="button" aria-pressed="true" aria-label="Sonido activado. Toca para apagarlo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 h4 l5 -4 v14 l-5 -4 H4Z" fill="currentColor"/><path class="on" d="M16 8.5 q3 3.500 0 7 M18.500 6 q5 6 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path class="off" d="M16 9 l5 6 M21 9 l-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   <a class="placar" id="placar" href="#mapa" aria-label="Estrellas ganadas. Ir al mapa del paseo"><svg class="est" viewBox="0 0 48 48" aria-hidden="true"><use href="#estrela"/></svg> <span id="contador">0 de 18</span></a>
   <div class="rio-topo" id="progresso"></div>
@@ -3549,7 +3549,7 @@ p.e9pj-seg{margin:14px 0 0;max-width:none}
       <p class="cab-sub">Periódico Educativo Socioambiental</p>
       <p class="cab-meta"><span>Edición n.º 12</span></p>
     </div>
-    <h1 aria-label="Escorpiones en la ciudad: ¡yo sé protegerme!"><span aria-hidden="true"><i class="lt" style="--i:0">E</i><i class="lt" style="--i:1">s</i><i class="lt" style="--i:2">c</i><i class="lt" style="--i:3">o</i><i class="lt" style="--i:4">r</i><i class="lt" style="--i:5">p</i><i class="lt" style="--i:6">i</i><i class="lt" style="--i:7">o</i><i class="lt" style="--i:8">n</i><i class="lt" style="--i:9">e</i><i class="lt" style="--i:10">s</i> <i class="lt" style="--i:11">e</i><i class="lt" style="--i:12">n</i> <i class="lt" style="--i:13">l</i><i class="lt" style="--i:14">a</i> <i class="lt" style="--i:15">c</i><i class="lt" style="--i:16">i</i><i class="lt" style="--i:17">u</i><i class="lt" style="--i:18">d</i><i class="lt" style="--i:19">a</i><i class="lt" style="--i:20">d</i><i class="lt" style="--i:21">:</i></span><span aria-hidden="true"><b>¡yo sé protegerme!</b></span></h1>
+    <h1 aria-label="Escorpiones en la ciudad: ¡yo sé protegerme!"><span aria-hidden="true" class="notranslate" translate="no"><i class="lt" style="--i:0">E</i><i class="lt" style="--i:1">s</i><i class="lt" style="--i:2">c</i><i class="lt" style="--i:3">o</i><i class="lt" style="--i:4">r</i><i class="lt" style="--i:5">p</i><i class="lt" style="--i:6">i</i><i class="lt" style="--i:7">o</i><i class="lt" style="--i:8">n</i><i class="lt" style="--i:9">e</i><i class="lt" style="--i:10">s</i> <i class="lt" style="--i:11">e</i><i class="lt" style="--i:12">n</i> <i class="lt" style="--i:13">l</i><i class="lt" style="--i:14">a</i> <i class="lt" style="--i:15">c</i><i class="lt" style="--i:16">i</i><i class="lt" style="--i:17">u</i><i class="lt" style="--i:18">d</i><i class="lt" style="--i:19">a</i><i class="lt" style="--i:20">d</i><i class="lt" style="--i:21">:</i></span><span aria-hidden="true"><b>¡yo sé protegerme!</b></span></h1>
     <p class="e8-sub">Él se esconde. ¡Yo me quedo atento!</p>
     <p class="lead">Ven con Nico, el explorador cuidadoso, a conocer el escorpión, descubrir dónde se esconde y aprender qué hacer para estar seguro. ¡Hay 18 juegos en el camino!</p>
     <div class="e10-pergunta"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="#FFC83D" stroke="#12235A" stroke-width="3"/><path d="M17 18q0-8 7-8t7 7q0 5-7 7v5" fill="none" stroke="#12235A" stroke-width="4" stroke-linecap="round"/><circle cx="24" cy="36" r="2.8" fill="#12235A"/></svg><p><small>La pregunta de esta edición</small>¿Qué hago para protegerme del escorpión?</p></div>

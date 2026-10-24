@@ -2256,7 +2256,7 @@ to{stroke-dashoffset:0}
 <link rel="alternate" hreflang="pt-BR" href="https://educaanap.org.br/index.html">
 <link rel="alternate" hreflang="en-US" href="https://educaanap.org.br/en/index.html">
 <link rel="alternate" hreflang="es-ES" href="https://educaanap.org.br/es/index.html">
-<script>(function(){try{var s=localStorage.getItem("ecoLegalIdioma"),h={"en":"en/index.html","es":"es/index.html"};if(s&&h[s])location.replace(h[s]+location.hash);}catch(e){}})();</script>
+<script>(function(){try{localStorage.removeItem("ecoLegalIdioma")}catch(e){}try{var s=sessionStorage.getItem("ecoLegalIdioma"),h={"en":"en/index.html","es":"es/index.html"};if(s&&h[s])location.replace(h[s]+location.hash);}catch(e){}})();</script>
 <style id="idiomas-css">
 .idiomas{display:flex;align-items:center;gap:2px;margin-left:auto;background:var(--papel2,#E9F1FF);border-radius:999px;padding:3px;flex:none;box-shadow:0 3px 0 var(--linha,#C3D3F0)}
 .topo .idiomas a,.idiomas a{font:800 13px/1 'Baloo 2',system-ui,sans-serif!important;color:var(--tinta,#12235A)!important;text-decoration:none!important;padding:8px 8px!important;border-radius:999px;min-height:0!important;min-width:0!important;display:block!important;letter-spacing:.02em;background:none;box-shadow:none}
@@ -2267,8 +2267,8 @@ to{stroke-dashoffset:0}
 @media(max-width:560px){.topo .logo:has(+ .idiomas),.topo .logo:has(~ .idiomas){font-size:0!important;flex:none!important}.topo .logo svg{flex:none}}
 @media print{.idiomas{display:none!important}}
 </style>
-<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.idiomas a[href]');if(!a)return;try{localStorage.setItem('ecoLegalIdioma',a.getAttribute('data-l'))}catch(_){}if(location.hash){a.href=a.getAttribute('href').split('#')[0]+location.hash;}},true);</script>
-<style>.np-topo .idiomas{margin-left:0}@media(min-width:921px){html:not([lang|=pt]) .ea-nav a{padding-inline:7px!important;font-size:.9rem!important}}@media(min-width:921px) and (max-width:1439px){.np-topo .np-mini{display:none!important}}@media(max-width:920px){.np-topo .idiomas{order:2;margin-left:auto}}</style>
+<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.idiomas a[href]');if(!a)return;try{sessionStorage.setItem('ecoLegalIdioma',a.getAttribute('data-l'))}catch(_){}if(location.hash){a.href=a.getAttribute('href').split('#')[0]+location.hash;}},true);</script>
+<style>#portal.np .np-topo-in{flex-wrap:wrap!important;gap:8px 16px!important;padding:10px 0 6px!important;min-height:0!important}#portal.np .np-topo .idiomas{order:2;margin-left:auto!important}#portal.np .np-topo .np-mini{order:3;margin-left:0!important}#portal.np .np-topo .ea-nav{order:4!important;width:100%!important;margin:0 -6px!important;padding:0 0 4px!important;justify-content:flex-start;overflow-x:auto}#portal.np .np-topo .ea-nav a{font-size:1.06rem!important;padding:9px 16px!important}@media(max-width:700px){#portal.np .np-topo .ea-nav a{font-size:.98rem!important;padding:8px 12px!important}}</style>
 </head>
 <body class="ver-portal">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
@@ -2422,7 +2422,7 @@ to{stroke-dashoffset:0}
       <a href="#p-busca">Atividades</a>
       <a href="#p-contato">Contato</a>
     </nav>
-    <nav class="idiomas" aria-label="Idioma"><a href="index.html" hreflang="pt-BR" lang="pt-BR" data-l="pt" title="Português" aria-current="page">PT</a><a href="en/index.html" hreflang="en-US" lang="en-US" data-l="en" title="English">EN</a><a href="es/index.html" hreflang="es-ES" lang="es-ES" data-l="es" title="Español">ES</a></nav>
+    <nav class="idiomas notranslate" translate="no" aria-label="Idioma"><a href="index.html" hreflang="pt-BR" lang="pt-BR" data-l="pt" title="Português" aria-current="page">PT</a><a href="en/index.html" hreflang="en-US" lang="en-US" data-l="en" title="English">EN</a><a href="es/index.html" hreflang="es-ES" lang="es-ES" data-l="es" title="Español">ES</a></nav>
     <a class="np-btn np-mini" href="#p-projetos">Abrir o jornal</a>
   </div>
 </header>
@@ -3205,7 +3205,7 @@ to{stroke-dashoffset:0}
 <header class="topo">
   <a class="volta" href="#p-projetos" aria-label="Voltar ao portal EducaANAP"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.500 5 7.500 12l7 7"/></svg></a>
   <a class="logo" href="#capa"><svg viewBox="0 0 120 152" aria-hidden="true"><use href="#pingo"/></svg>Eco Legal Interativo</a>
-  <nav class="idiomas" aria-label="Idioma"><a href="index.html" hreflang="pt-BR" lang="pt-BR" data-l="pt" title="Português" aria-current="page">PT</a><a href="en/index.html" hreflang="en-US" lang="en-US" data-l="en" title="English">EN</a><a href="es/index.html" hreflang="es-ES" lang="es-ES" data-l="es" title="Español">ES</a></nav>
+  <nav class="idiomas notranslate" translate="no" aria-label="Idioma"><a href="index.html" hreflang="pt-BR" lang="pt-BR" data-l="pt" title="Português" aria-current="page">PT</a><a href="en/index.html" hreflang="en-US" lang="en-US" data-l="en" title="English">EN</a><a href="es/index.html" hreflang="es-ES" lang="es-ES" data-l="es" title="Español">ES</a></nav>
   <button class="som" id="somBtn" type="button" aria-pressed="true" aria-label="Som ligado. Toque para desligar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 h4 l5 -4 v14 l-5 -4 H4Z" fill="currentColor"/><path class="on" d="M16 8.5 q3 3.500 0 7 M18.500 6 q5 6 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path class="off" d="M16 9 l5 6 M21 9 l-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   <a class="placar" id="placar" href="#mapa" aria-label="Estrelas ganhas. Ir para o mapa da viagem"><svg class="est" viewBox="0 0 48 48" aria-hidden="true"><use href="#estrela"/></svg> <span id="contador">0 de 15</span></a>
   <div class="rio-topo" id="progresso"></div>
@@ -3237,7 +3237,7 @@ to{stroke-dashoffset:0}
       <p class="cab-sub">Jornal Educativo Socioambiental</p>
       <p class="cab-meta"><span>Edição nº 1</span></p>
     </div>
-    <h1 aria-label="Águas da cidade"><span aria-hidden="true"><i class="lt" style="--i:0">Á</i><i class="lt" style="--i:1">g</i><i class="lt" style="--i:2">u</i><i class="lt" style="--i:3">a</i><i class="lt" style="--i:4">s</i></span><span aria-hidden="true"><i class="lt" style="--i:5">d</i><i class="lt" style="--i:6">a</i><i class="lt" style="--i:7">&nbsp;</i><i class="lt" style="--i:8">c</i><i class="lt" style="--i:9">i</i><i class="lt" style="--i:10">d</i><i class="lt" style="--i:11">a</i><i class="lt" style="--i:12">d</i><i class="lt" style="--i:13">e</i></span></h1>
+    <h1 aria-label="Águas da cidade"><span aria-hidden="true" class="notranslate" translate="no"><i class="lt" style="--i:0">Á</i><i class="lt" style="--i:1">g</i><i class="lt" style="--i:2">u</i><i class="lt" style="--i:3">a</i><i class="lt" style="--i:4">s</i></span><span aria-hidden="true" class="notranslate" translate="no"><i class="lt" style="--i:5">d</i><i class="lt" style="--i:6">a</i><i class="lt" style="--i:7">&nbsp;</i><i class="lt" style="--i:8">c</i><i class="lt" style="--i:9">i</i><i class="lt" style="--i:10">d</i><i class="lt" style="--i:11">a</i><i class="lt" style="--i:12">d</i><i class="lt" style="--i:13">e</i></span></h1>
     <p class="lead">Viaje com o Pingo da nuvem até o rio. Tem 15 jogos no caminho!</p>
     <p class="libras-aviso"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V5.500a1.500 1.500 0 0 1 3 0V11m0-4.500v-2a1.500 1.500 0 0 1 3 0V11m0-5a1.500 1.500 0 0 1 3 0v8.500a6.500 6.500 0 0 1-12.300 3L3 14a1.500 1.500 0 0 1 2.600-1.500L8 15"/></svg>Tem tradução em Libras: toque no botão azul das mãos, na lateral da tela.</p>
     <svg class="pingo-capa" viewBox="0 0 120 152" role="img" aria-label="Pingo, uma gota de chuva sorridente de botas vermelhas, mascote desta edição"><use href="#pingo"/></svg>
@@ -5387,7 +5387,8 @@ function som(tipo){
   }
 })();
 </script>
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js" defer onload="try{new window.VLibras.Widget({rootPath:'https://vlibras.gov.br/app',avatar:'guga',position:'R'});document.documentElement.classList.add('tem-libras')}catch(e){}"></script>
+<div vw class="enabled"><div vw-access-button class="active"></div><div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div></div>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js" defer onload="try{new window.VLibras.Widget('https://vlibras.gov.br/app');document.documentElement.classList.add('tem-libras')}catch(e){}"></script>
 <script id="eco-ouvir-js">
 (function(){
   if(!('speechSynthesis' in window)) return;

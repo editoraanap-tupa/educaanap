@@ -3052,7 +3052,7 @@ p.e9pj-seg{margin:14px 0 0;max-width:none}
 <link rel="alternate" hreflang="pt-BR" href="https://educaanap.org.br/edicao-10.html">
 <link rel="alternate" hreflang="en-US" href="https://educaanap.org.br/en/edicao-10.html">
 <link rel="alternate" hreflang="es-ES" href="https://educaanap.org.br/es/edicao-10.html">
-<script>(function(){try{var s=localStorage.getItem("ecoLegalIdioma"),h={"pt":"../edicao-10.html","es":"../es/edicao-10.html"};if(s&&h[s])location.replace(h[s]+location.hash);}catch(e){}})();</script>
+<script>(function(){try{localStorage.removeItem("ecoLegalIdioma")}catch(e){}try{var s=sessionStorage.getItem("ecoLegalIdioma"),h={"pt":"../edicao-10.html","es":"../es/edicao-10.html"};if(s&&h[s])location.replace(h[s]+location.hash);}catch(e){}})();</script>
 <style id="idiomas-css">
 .idiomas{display:flex;align-items:center;gap:2px;margin-left:auto;background:var(--papel2,#E9F1FF);border-radius:999px;padding:3px;flex:none;box-shadow:0 3px 0 var(--linha,#C3D3F0)}
 .topo .idiomas a,.idiomas a{font:800 13px/1 'Baloo 2',system-ui,sans-serif!important;color:var(--tinta,#12235A)!important;text-decoration:none!important;padding:8px 8px!important;border-radius:999px;min-height:0!important;min-width:0!important;display:block!important;letter-spacing:.02em;background:none;box-shadow:none}
@@ -3063,7 +3063,7 @@ p.e9pj-seg{margin:14px 0 0;max-width:none}
 @media(max-width:560px){.topo .logo:has(+ .idiomas),.topo .logo:has(~ .idiomas){font-size:0!important;flex:none!important}.topo .logo svg{flex:none}}
 @media print{.idiomas{display:none!important}}
 </style>
-<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.idiomas a[href]');if(!a)return;try{localStorage.setItem('ecoLegalIdioma',a.getAttribute('data-l'))}catch(_){}if(location.hash){a.href=a.getAttribute('href').split('#')[0]+location.hash;}},true);</script>
+<script>document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.idiomas a[href]');if(!a)return;try{sessionStorage.setItem('ecoLegalIdioma',a.getAttribute('data-l'))}catch(_){}if(location.hash){a.href=a.getAttribute('href').split('#')[0]+location.hash;}},true);</script>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs></defs><defs>
@@ -3207,7 +3207,7 @@ p.e9pj-seg{margin:14px 0 0;max-width:none}
 <header class="topo">
   <a class="volta" href="index.html" aria-label="Back to the EducaANAP portal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
   <a class="logo" href="#capa"><svg viewBox="0 0 160 196" aria-hidden="true"><use href="#arv"/></svg>Eco Legal Interactive</a>
-  <nav class="idiomas" aria-label="Language"><a href="../edicao-10.html" hreflang="pt-BR" lang="pt-BR" data-l="pt" title="Português">PT</a><a href="edicao-10.html" hreflang="en-US" lang="en-US" data-l="en" title="English" aria-current="page">EN</a><a href="../es/edicao-10.html" hreflang="es-ES" lang="es-ES" data-l="es" title="Español">ES</a></nav>
+  <nav class="idiomas notranslate" translate="no" aria-label="Language"><a href="../edicao-10.html" hreflang="pt-BR" lang="pt-BR" data-l="pt" title="Português">PT</a><a href="edicao-10.html" hreflang="en-US" lang="en-US" data-l="en" title="English" aria-current="page">EN</a><a href="../es/edicao-10.html" hreflang="es-ES" lang="es-ES" data-l="es" title="Español">ES</a></nav>
   <button class="som" id="somBtn" type="button" aria-pressed="true" aria-label="Sound on. Tap to turn off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9 h4 l5 -4 v14 l-5 -4 H4Z" fill="currentColor"/><path class="on" d="M16 8.5 q3 3.500 0 7 M18.500 6 q5 6 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path class="off" d="M16 9 l5 6 M21 9 l-5 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button>
   <a class="placar" id="placar" href="#mapa" aria-label="Stars earned. Go to the tour map"><svg class="est" viewBox="0 0 48 48" aria-hidden="true"><use href="#estrela"/></svg> <span id="contador">0 of 17</span></a>
   <div class="rio-topo" id="progresso"></div>
@@ -3231,7 +3231,7 @@ p.e9pj-seg{margin:14px 0 0;max-width:none}
       <p class="cab-sub">Socio-Environmental Educational Newspaper</p>
       <p class="cab-meta"><span>Issue no. 10</span></p>
     </div>
-    <h1 aria-label="The city is changing!"><span aria-hidden="true"><i class="lt" style="--i:0">T</i><i class="lt" style="--i:1">h</i><i class="lt" style="--i:2">e</i> <i class="lt" style="--i:3">c</i><i class="lt" style="--i:4">i</i><i class="lt" style="--i:5">t</i><i class="lt" style="--i:6">y</i></span><span aria-hidden="true"><b>is changing!</b></span></h1>
+    <h1 aria-label="The city is changing!"><span aria-hidden="true" class="notranslate" translate="no"><i class="lt" style="--i:0">T</i><i class="lt" style="--i:1">h</i><i class="lt" style="--i:2">e</i> <i class="lt" style="--i:3">c</i><i class="lt" style="--i:4">i</i><i class="lt" style="--i:5">t</i><i class="lt" style="--i:6">y</i></span><span aria-hidden="true"><b>is changing!</b></span></h1>
     <p class="e8-sub">How can we prepare our city for heat, rain and other climate challenges?</p>
     <p class="lead">Come with Íris, a curious girl in a yellow raincoat, to find out what happens to the city when the climate changes and what everyone can do to make it better prepared. There are 17 games along the way!</p>
     <div class="e10-pergunta"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="21" fill="#FFC83D" stroke="#12235A" stroke-width="3"/><path d="M17 18q0-8 7-8t7 7q0 5-7 7v5" fill="none" stroke="#12235A" stroke-width="4" stroke-linecap="round"/><circle cx="24" cy="36" r="2.8" fill="#12235A"/></svg><p><small>This issue's question</small>How can we help our city face climate change?</p></div>
